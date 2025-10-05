@@ -2,7 +2,6 @@
 
 import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
-import { useTheme } from "next-themes";
 
 interface Particle {
   id: number;
@@ -20,7 +19,6 @@ const ParticleBackground = () => {
   const animationRef = useRef<number | undefined>(undefined);
   const particlesRef = useRef<Particle[]>([]);
   const [mounted, setMounted] = useState(false);
-  const { theme, resolvedTheme } = useTheme();
 
   const particleCount = 50;
   const connectionDistance = 150;
@@ -54,7 +52,7 @@ const ParticleBackground = () => {
           speedX: (Math.random() - 0.5) * 0.8,
           speedY: (Math.random() - 0.5) * 0.8,
           opacity: Math.random() * 0.6 + 0.2,
-          color: resolvedTheme === "dark" ? "#60a5fa" : "#3b82f6",
+          color: "#60a5fa",
         });
       }
     };
@@ -76,8 +74,8 @@ const ParticleBackground = () => {
         particle.x = Math.max(0, Math.min(canvas.width, particle.x));
         particle.y = Math.max(0, Math.min(canvas.height, particle.y));
 
-        // Update color based on theme
-        particle.color = resolvedTheme === "dark" ? "#60a5fa" : "#3b82f6";
+        // Use consistent color
+        particle.color = "#60a5fa";
       });
     };
 
@@ -94,10 +92,7 @@ const ParticleBackground = () => {
 
           if (distance < connectionDistance) {
             const opacity = (1 - distance / connectionDistance) * 0.3;
-            ctx.strokeStyle =
-              resolvedTheme === "dark"
-                ? `rgba(96, 165, 250, ${opacity})`
-                : `rgba(59, 130, 246, ${opacity})`;
+            ctx.strokeStyle = `rgba(96, 165, 250, ${opacity})`;
             ctx.lineWidth = 1;
             ctx.beginPath();
             ctx.moveTo(particle.x, particle.y);
@@ -150,7 +145,7 @@ const ParticleBackground = () => {
       }
       window.removeEventListener("resize", handleResize);
     };
-  }, [mounted, theme, resolvedTheme]);
+  }, [mounted]);
 
   if (!mounted) return null;
 

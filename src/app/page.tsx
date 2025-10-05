@@ -2,27 +2,19 @@
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { useTheme } from "next-themes";
 import {
-  Moon,
-  Sun,
   Menu,
   X,
   Mail,
   Phone,
   Github,
   Linkedin,
-  MapPin,
-  Calendar,
   Code,
-  Briefcase,
-  GraduationCap,
   Zap,
   Database,
   Globe,
   Server,
   Users,
-  Award,
   ArrowRight,
   Download,
 } from "lucide-react";
@@ -32,7 +24,6 @@ import ProjectCard from "../components/ProjectCard";
 import StatsCounter from "../components/StatsCounter";
 import ExperienceTimeline from "../components/ExperienceTimeline";
 import EducationCards from "../components/EducationCards";
-import ThemeToggle from "../components/ThemeToggle";
 
 const fadeInUp = {
   initial: { opacity: 0, y: 60 },
@@ -51,7 +42,6 @@ export default function Portfolio() {
   const [mounted, setMounted] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("hero");
-  const { theme, setTheme, resolvedTheme } = useTheme();
 
   useEffect(() => {
     setMounted(true);
@@ -133,9 +123,6 @@ export default function Portfolio() {
             </div>
 
             <div className="flex items-center space-x-4">
-              {/* Theme Toggle */}
-              <ThemeToggle />
-
               {/* Mobile Menu Button */}
               <button
                 className="md:hidden p-2"
@@ -340,29 +327,6 @@ export default function Portfolio() {
                 extensive experience in React, Node.js, AWS, and modern
                 development practices.
               </p>
-
-              <div className="grid grid-cols-2 gap-4 pt-6">
-                {[
-                  { icon: MapPin, label: "New Delhi, India" },
-                  { icon: Briefcase, label: "Founding Engineer" },
-                  { icon: GraduationCap, label: "B.Tech ECE (IoT)" },
-                  { icon: Award, label: "CGPA: 7.52" },
-                ].map((item, index) => (
-                  <motion.div
-                    key={index}
-                    initial={{ opacity: 0, x: -20 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: index * 0.1 }}
-                    className="flex items-center space-x-3"
-                  >
-                    <item.icon className="w-5 h-5 text-blue-600 dark:text-blue-400" />
-                    <span className="text-gray-600 dark:text-gray-300">
-                      {item.label}
-                    </span>
-                  </motion.div>
-                ))}
-              </div>
             </motion.div>
 
             <StatsCounter
@@ -580,7 +544,6 @@ export default function Portfolio() {
                 institution: "Netaji Subhas University of Technology",
                 period: "2021 - 2025",
                 location: "New Delhi, India",
-                grade: "7.52",
                 description:
                   "Comprehensive program combining Electronics & Communication Engineering with Internet of Things specialization, covering embedded systems, wireless communication, and smart device development.",
                 highlights: [
@@ -596,7 +559,6 @@ export default function Portfolio() {
                 institution: "Govt Sarvodaya Co Ed Vidyalaya",
                 period: "2021",
                 location: "New Delhi, India",
-                grade: "91.2%",
                 description:
                   "Completed senior secondary education with focus on Physics, Chemistry, and Mathematics, building strong analytical and problem-solving foundation.",
                 highlights: [
@@ -612,7 +574,6 @@ export default function Portfolio() {
                 institution: "Nathu Ram Convent Sr. Sec. School",
                 period: "2019",
                 location: "New Delhi, India",
-                grade: "90.6%",
                 description:
                   "Completed secondary education with excellent academic performance, establishing fundamental knowledge across all subjects.",
                 highlights: [

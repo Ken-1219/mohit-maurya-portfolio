@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import { ThemeProvider } from "next-themes";
+
 import CustomCursor from "../components/CustomCursor";
 import ParticleBackground from "../components/ParticleBackground";
 import FloatingIcons from "../components/FloatingIcons";
@@ -56,37 +56,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <head>
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              try {
-                if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-                  document.documentElement.classList.add('dark')
-                } else {
-                  document.documentElement.classList.remove('dark')
-                }
-              } catch (_) {}
-            `,
-          }}
-        />
-      </head>
+      <head />
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
         suppressHydrationWarning
       >
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem={true}
-          disableTransitionOnChange={false}
-          storageKey="theme"
-        >
-          <ParticleBackground />
-          <FloatingIcons />
-          <CustomCursor />
-          {children}
-        </ThemeProvider>
+        <ParticleBackground />
+        <FloatingIcons />
+        <CustomCursor />
+        {children}
       </body>
     </html>
   );

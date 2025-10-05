@@ -1,21 +1,14 @@
 "use client";
 
 import { motion } from "framer-motion";
-import {
-  GraduationCap,
-  Calendar,
-  MapPin,
-  Award,
-  BookOpen,
-  Star,
-} from "lucide-react";
+import { GraduationCap, Calendar, MapPin, BookOpen, Star } from "lucide-react";
 
 interface EducationItem {
   degree: string;
   institution: string;
   period: string;
   location: string;
-  grade: string;
+  grade?: string;
   description?: string;
   highlights?: string[];
   color: string;
@@ -48,7 +41,7 @@ const EducationCards = ({ educationData }: EducationCardsProps) => {
       y: 0,
       scale: 1,
       transition: {
-        type: "spring",
+        type: "spring" as const,
         damping: 20,
         stiffness: 300,
         duration: 0.6,
@@ -125,13 +118,6 @@ const EducationCards = ({ educationData }: EducationCardsProps) => {
                         <Calendar className="w-3 h-3 mr-1" />
                         {education.period}
                       </div>
-                      <span
-                        className={`inline-block px-3 py-1 bg-gradient-to-r ${education.color} text-white text-sm font-bold rounded-full shadow-md`}
-                      >
-                        {education.grade.includes("%")
-                          ? education.grade
-                          : `CGPA: ${education.grade}`}
-                      </span>
                     </div>
                   </div>
 
