@@ -324,16 +324,16 @@ export default function Portfolio() {
               </div>
 
               {/* Status indicator */}
-              <div className="absolute bottom-2 right-2 w-6 h-6 bg-green-500 rounded-full border-4 border-white dark:border-gray-900 animate-pulse"></div>
+              {/* <div className="absolute bottom-2 right-2 w-6 h-6 bg-green-500 rounded-full border-4 border-white dark:border-gray-900 animate-pulse"></div> */}
             </div>
           </motion.div>
 
           {/* Name with enhanced animation */}
-          <motion.h1
+          <motion.h3
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3, duration: 0.8, ease: "easeOut" }}
-            className="text-5xl sm:text-7xl lg:text-8xl font-bold mb-6 tracking-tight"
+            className="text-3xl sm:text-4xl lg:text-6xl font-bold mb-6 tracking-tight"
           >
             <motion.span
               className="inline-block bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600 bg-clip-text text-transparent"
@@ -351,7 +351,7 @@ export default function Portfolio() {
             >
               Mohit Maurya
             </motion.span>
-          </motion.h1>
+          </motion.h3>
 
           <motion.div
             {...fadeInUp}
@@ -436,25 +436,25 @@ export default function Portfolio() {
                 icon: Github,
                 href: "https://github.com/Ken-1219",
                 label: "GitHub",
-                color: "from-gray-600 to-gray-800",
+                color: "",
               },
               {
                 icon: Linkedin,
                 href: "https://www.linkedin.com/in/mohit-maurya-9a13a222a/",
                 label: "LinkedIn",
-                color: "from-blue-600 to-blue-800",
+                color: "",
               },
               {
                 icon: Mail,
                 href: "mailto:mohitmaurya78871@gmail.com",
                 label: "Email",
-                color: "from-red-500 to-red-700",
+                color: "",
               },
               {
                 icon: Phone,
                 href: "tel:+918882825731",
                 label: "Phone",
-                color: "from-green-500 to-green-700",
+                color: "",
               },
             ].map((social, index) => (
               <motion.a
@@ -484,7 +484,7 @@ export default function Portfolio() {
           </motion.div>
 
           {/* Scroll indicator */}
-          <motion.div
+          {/* <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 1.5, duration: 0.8 }}
@@ -508,7 +508,7 @@ export default function Portfolio() {
                 />
               </div>
             </motion.div>
-          </motion.div>
+          </motion.div> */}
         </div>
       </section>
 
