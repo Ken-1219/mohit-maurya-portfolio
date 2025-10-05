@@ -30,6 +30,9 @@ import ScrollToTop from "../components/ScrollToTop";
 import TypewriterEffect from "../components/TypewriterEffect";
 import ProjectCard from "../components/ProjectCard";
 import StatsCounter from "../components/StatsCounter";
+import ExperienceTimeline from "../components/ExperienceTimeline";
+import EducationCards from "../components/EducationCards";
+import ThemeToggle from "../components/ThemeToggle";
 
 const fadeInUp = {
   initial: { opacity: 0, y: 60 },
@@ -48,7 +51,7 @@ export default function Portfolio() {
   const [mounted, setMounted] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("hero");
-  const { theme, setTheme } = useTheme();
+  const { theme, setTheme, resolvedTheme } = useTheme();
 
   useEffect(() => {
     setMounted(true);
@@ -131,19 +134,7 @@ export default function Portfolio() {
 
             <div className="flex items-center space-x-4">
               {/* Theme Toggle */}
-              <motion.button
-                initial={{ opacity: 0, scale: 0 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: 0.2 }}
-                onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-                className="p-2 rounded-full bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
-              >
-                {theme === "dark" ? (
-                  <Sun className="w-5 h-5" />
-                ) : (
-                  <Moon className="w-5 h-5" />
-                )}
-              </motion.button>
+              <ThemeToggle />
 
               {/* Mobile Menu Button */}
               <button
@@ -412,7 +403,7 @@ export default function Portfolio() {
                   delay: 0.6,
                 },
               ]}
-              className="w-full"
+              className="grid grid-cols-2 gap-6 w-full"
             />
           </div>
         </div>
@@ -423,30 +414,40 @@ export default function Portfolio() {
         id="experience"
         className="py-20 px-4 sm:px-6 lg:px-8 bg-gray-50 dark:bg-gray-800/50"
       >
-        <div className="max-w-6xl mx-auto">
+        <div className="max-w-7xl mx-auto">
           <motion.div
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <h2 className="text-3xl sm:text-4xl font-bold mb-4">Experience</h2>
-            <div className="w-24 h-1 bg-gradient-to-r from-blue-600 to-purple-600 mx-auto"></div>
+            <h2 className="text-3xl sm:text-4xl font-bold mb-4">My Journey</h2>
+            <div className="w-24 h-1 bg-gradient-to-r from-blue-600 to-purple-600 mx-auto mb-6"></div>
+            <p className="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+              From aspiring developer to founding engineer, here&apos;s my
+              professional journey of growth, learning, and impact.
+            </p>
           </motion.div>
 
-          <div className="space-y-12">
-            {[
+          <ExperienceTimeline
+            experiences={[
               {
                 title: "Founding Engineer",
                 company: "ContraVault AI",
                 period: "December 2024 - Present",
                 type: "Full-time",
+                location: "Remote",
                 description: [
+                  "Leading end-to-end development of AI-powered contract analysis platform, architecting scalable solutions that serve enterprise clients with complex legal document processing needs.",
                   "Implemented Attribute-Based Access Control (ABAC) end-to-end, defining three unique user roles with precise access restrictions",
                   "Designed and optimized backend APIs with server-side caching and SSE streaming, enabling progressive and real-time updates",
                   "Managed AWS infrastructure including ECS for long-running APIs and autoscaling, along with Lambda, Step Functions, IAM, S3, and CloudWatch",
                   "Developed services in Python (FastAPI) and contributed to the frontend (Next.js + TypeScript)",
-                  "Enhanced feature performance, improving accuracy from 43% to 94% by redesigning feature logic and optimizing implementation",
+                ],
+                achievements: [
+                  "Enhanced feature performance, improving accuracy from 43% to 94% by redesigning feature logic",
+                  "Built credit-based free/paid access model with full integration",
+                  "Established scalable AWS infrastructure supporting enterprise workloads",
                 ],
                 technologies: [
                   "Python",
@@ -457,6 +458,7 @@ export default function Portfolio() {
                   "Lambda",
                   "S3",
                   "CloudWatch",
+                  "Step Functions",
                 ],
               },
               {
@@ -464,10 +466,17 @@ export default function Portfolio() {
                 company: "Yirifi.ai",
                 period: "June 2024 - November 2024",
                 type: "Internship",
+                location: "Remote",
                 description: [
+                  "Contributed to an AI-powered platform development, focusing on creating robust backend systems and intuitive user interfaces for machine learning applications.",
                   "Engineered and optimized RESTful backend APIs using Express.js, integrating third-party services",
                   "Developed and deployed dynamic, responsive web interfaces with Next.js and Tailwind CSS",
                   "Maintained high code quality through peer code reviews, adherence to best practices, and implementation of automated unit tests",
+                ],
+                achievements: [
+                  "Successfully delivered multiple feature releases ahead of schedule",
+                  "Improved application performance through API optimization",
+                  "Mentored junior developers in best practices",
                 ],
                 technologies: [
                   "Express.js",
@@ -475,62 +484,11 @@ export default function Portfolio() {
                   "Tailwind CSS",
                   "Node.js",
                   "REST APIs",
+                  "MongoDB",
                 ],
               },
-            ].map((exp, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.2 }}
-                className="relative"
-              >
-                <div className="bg-white dark:bg-gray-900 rounded-xl p-8 shadow-lg hover:shadow-xl transition-shadow border border-gray-200 dark:border-gray-700">
-                  <div className="flex flex-col lg:flex-row lg:items-center justify-between mb-6">
-                    <div>
-                      <h3 className="text-2xl font-bold text-gray-900 dark:text-white">
-                        {exp.title}
-                      </h3>
-                      <p className="text-lg text-blue-600 dark:text-blue-400 font-semibold">
-                        {exp.company}
-                      </p>
-                      <span className="inline-block px-3 py-1 text-xs font-medium bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 rounded-full mt-2">
-                        {exp.type}
-                      </span>
-                    </div>
-                    <div className="flex items-center text-gray-500 dark:text-gray-400 mt-4 lg:mt-0">
-                      <Calendar className="w-4 h-4 mr-2" />
-                      {exp.period}
-                    </div>
-                  </div>
-
-                  <ul className="space-y-3 mb-6">
-                    {exp.description.map((item, idx) => (
-                      <li
-                        key={idx}
-                        className="flex items-start text-gray-600 dark:text-gray-300"
-                      >
-                        <ArrowRight className="w-4 h-4 mt-0.5 mr-3 text-blue-600 dark:text-blue-400 flex-shrink-0" />
-                        {item}
-                      </li>
-                    ))}
-                  </ul>
-
-                  <div className="flex flex-wrap gap-2">
-                    {exp.technologies.map((tech, techIdx) => (
-                      <span
-                        key={techIdx}
-                        className="px-3 py-1 text-sm bg-gradient-to-r from-blue-500/10 to-purple-500/10 text-blue-700 dark:text-blue-300 rounded-full border border-blue-200 dark:border-blue-700"
-                      >
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
+            ]}
+          />
         </div>
       </section>
 
@@ -600,7 +558,7 @@ export default function Portfolio() {
         id="education"
         className="py-20 px-4 sm:px-6 lg:px-8 bg-gray-50 dark:bg-gray-800/50"
       >
-        <div className="max-w-6xl mx-auto">
+        <div className="max-w-7xl mx-auto">
           <motion.div
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
@@ -608,73 +566,71 @@ export default function Portfolio() {
             className="text-center mb-16"
           >
             <h2 className="text-3xl sm:text-4xl font-bold mb-4">Education</h2>
-            <div className="w-24 h-1 bg-gradient-to-r from-blue-600 to-purple-600 mx-auto"></div>
+            <div className="w-24 h-1 bg-gradient-to-r from-blue-600 to-purple-600 mx-auto mb-6"></div>
+            <p className="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+              My academic journey has been focused on building a strong
+              foundation in technology and engineering principles.
+            </p>
           </motion.div>
 
-          <div className="space-y-8">
-            {[
+          <EducationCards
+            educationData={[
               {
-                degree: "B.Tech in ECE with specialization in IoT",
+                degree: "B.Tech in ECE with IoT Specialization",
                 institution: "Netaji Subhas University of Technology",
                 period: "2021 - 2025",
                 location: "New Delhi, India",
-                grade: "CGPA: 7.52",
+                grade: "7.52",
+                description:
+                  "Comprehensive program combining Electronics & Communication Engineering with Internet of Things specialization, covering embedded systems, wireless communication, and smart device development.",
+                highlights: [
+                  "IoT Systems Design & Implementation",
+                  "Embedded Systems Programming",
+                  "Wireless Communication Protocols",
+                  "Circuit Design & Analysis",
+                ],
+                color: "from-blue-500 to-cyan-500",
               },
               {
-                degree: "Class XII",
-                institution: "Govt Sarvodaya Co Ed Vidyalaya, Multan Nagar",
+                degree: "Senior Secondary (XII)",
+                institution: "Govt Sarvodaya Co Ed Vidyalaya",
                 period: "2021",
                 location: "New Delhi, India",
-                grade: "Percentage: 91.2%",
+                grade: "91.2%",
+                description:
+                  "Completed senior secondary education with focus on Physics, Chemistry, and Mathematics, building strong analytical and problem-solving foundation.",
+                highlights: [
+                  "Science Stream (PCM)",
+                  "Strong Mathematical Foundation",
+                  "Physics & Chemistry Excellence",
+                  "Analytical Thinking Development",
+                ],
+                color: "from-purple-500 to-pink-500",
               },
               {
-                degree: "Class X",
+                degree: "Secondary (X)",
                 institution: "Nathu Ram Convent Sr. Sec. School",
                 period: "2019",
                 location: "New Delhi, India",
-                grade: "Percentage: 90.6%",
+                grade: "90.6%",
+                description:
+                  "Completed secondary education with excellent academic performance, establishing fundamental knowledge across all subjects.",
+                highlights: [
+                  "All Subjects Excellence",
+                  "Strong Academic Foundation",
+                  "Consistent Performance",
+                  "Holistic Development Focus",
+                ],
+                color: "from-indigo-500 to-purple-500",
               },
-            ].map((edu, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.2 }}
-                className="bg-white dark:bg-gray-900 rounded-xl p-8 shadow-lg border border-gray-200 dark:border-gray-700"
-              >
-                <div className="flex flex-col lg:flex-row lg:items-center justify-between">
-                  <div className="flex-1">
-                    <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">
-                      {edu.degree}
-                    </h3>
-                    <p className="text-lg text-blue-600 dark:text-blue-400 font-semibold mb-2">
-                      {edu.institution}
-                    </p>
-                    <div className="flex items-center text-gray-600 dark:text-gray-300 text-sm">
-                      <MapPin className="w-4 h-4 mr-2" />
-                      {edu.location}
-                    </div>
-                  </div>
-                  <div className="mt-4 lg:mt-0 lg:text-right">
-                    <div className="flex items-center text-gray-500 dark:text-gray-400 mb-2">
-                      <Calendar className="w-4 h-4 mr-2" />
-                      {edu.period}
-                    </div>
-                    <span className="inline-block px-4 py-2 bg-gradient-to-r from-green-500/10 to-blue-500/10 text-green-700 dark:text-green-300 rounded-full text-sm font-semibold">
-                      {edu.grade}
-                    </span>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
+            ]}
+          />
         </div>
       </section>
 
       {/* Skills Section */}
       <section id="skills" className="py-20 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-6xl mx-auto">
+        <div className="max-w-7xl mx-auto">
           <motion.div
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
@@ -684,7 +640,11 @@ export default function Portfolio() {
             <h2 className="text-3xl sm:text-4xl font-bold mb-4">
               Skills & Technologies
             </h2>
-            <div className="w-24 h-1 bg-gradient-to-r from-blue-600 to-purple-600 mx-auto"></div>
+            <div className="w-24 h-1 bg-gradient-to-r from-blue-600 to-purple-600 mx-auto mb-6"></div>
+            <p className="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+              A comprehensive overview of my technical expertise and the tools I
+              use to build amazing digital experiences.
+            </p>
           </motion.div>
 
           <motion.div
@@ -692,7 +652,7 @@ export default function Portfolio() {
             initial="initial"
             whileInView="animate"
             viewport={{ once: true }}
-            className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
+            className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
           >
             {[
               {
@@ -757,37 +717,50 @@ export default function Portfolio() {
               <motion.div
                 key={index}
                 variants={fadeInUp}
-                className="group bg-white dark:bg-gray-900 rounded-xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-200 dark:border-gray-700"
+                className="group bg-white dark:bg-gray-900 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-200 dark:border-gray-700 hover:border-transparent hover:shadow-2xl"
               >
+                {/* Background Gradient */}
                 <div
-                  className={`w-12 h-12 rounded-lg bg-gradient-to-r ${skillGroup.color} flex items-center justify-center mb-6 group-hover:scale-110 transition-transform`}
-                >
-                  <skillGroup.icon className="w-6 h-6 text-white" />
-                </div>
+                  className={`absolute inset-0 rounded-2xl bg-gradient-to-br ${skillGroup.color} opacity-0 group-hover:opacity-5 transition-opacity duration-300`}
+                />
 
-                <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4">
-                  {skillGroup.category}
-                </h3>
-
-                <div className="space-y-3">
-                  {skillGroup.skills.map((skill, skillIdx) => (
-                    <motion.div
-                      key={skillIdx}
-                      initial={{ opacity: 0, x: -20 }}
-                      whileInView={{ opacity: 1, x: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: index * 0.1 + skillIdx * 0.05 }}
-                      className="flex items-center justify-between group/skill"
+                {/* Content */}
+                <div className="relative z-10">
+                  <div className="flex items-center mb-4">
+                    <div
+                      className={`w-10 h-10 rounded-xl bg-gradient-to-r ${skillGroup.color} flex items-center justify-center mr-4 group-hover:scale-110 transition-transform shadow-lg`}
                     >
-                      <span className="text-gray-600 dark:text-gray-300 group-hover/skill:text-gray-900 dark:group-hover/skill:text-white transition-colors">
-                        {skill}
-                      </span>
-                      <div
-                        className={`w-2 h-2 rounded-full bg-gradient-to-r ${skillGroup.color} opacity-0 group-hover/skill:opacity-100 transition-opacity`}
-                      ></div>
-                    </motion.div>
-                  ))}
+                      <skillGroup.icon className="w-5 h-5 text-white" />
+                    </div>
+                    <h3 className="text-lg font-bold text-gray-900 dark:text-white group-hover:text-transparent group-hover:bg-gradient-to-r group-hover:from-blue-600 group-hover:to-purple-600 group-hover:bg-clip-text transition-all duration-300">
+                      {skillGroup.category}
+                    </h3>
+                  </div>
+
+                  <div className="grid grid-cols-1 gap-2">
+                    {skillGroup.skills.map((skill, skillIdx) => (
+                      <motion.div
+                        key={skillIdx}
+                        initial={{ opacity: 0, x: -20 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: index * 0.05 + skillIdx * 0.03 }}
+                        whileHover={{ x: 4, scale: 1.02 }}
+                        className="flex items-center group/skill cursor-default"
+                      >
+                        <div
+                          className={`w-1.5 h-1.5 rounded-full bg-gradient-to-r ${skillGroup.color} mr-3 flex-shrink-0 group-hover/skill:scale-150 transition-transform`}
+                        />
+                        <span className="text-sm text-gray-600 dark:text-gray-300 group-hover/skill:text-gray-900 dark:group-hover/skill:text-white transition-colors font-medium">
+                          {skill}
+                        </span>
+                      </motion.div>
+                    ))}
+                  </div>
                 </div>
+
+                {/* Decorative Elements */}
+                <div className="absolute top-2 right-2 w-2 h-2 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               </motion.div>
             ))}
           </motion.div>

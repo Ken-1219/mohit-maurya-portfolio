@@ -20,7 +20,7 @@ const ParticleBackground = () => {
   const animationRef = useRef<number | undefined>(undefined);
   const particlesRef = useRef<Particle[]>([]);
   const [mounted, setMounted] = useState(false);
-  const { theme } = useTheme();
+  const { theme, resolvedTheme } = useTheme();
 
   const particleCount = 50;
   const connectionDistance = 150;
@@ -54,7 +54,7 @@ const ParticleBackground = () => {
           speedX: (Math.random() - 0.5) * 0.8,
           speedY: (Math.random() - 0.5) * 0.8,
           opacity: Math.random() * 0.6 + 0.2,
-          color: theme === "dark" ? "#60a5fa" : "#3b82f6",
+          color: resolvedTheme === "dark" ? "#60a5fa" : "#3b82f6",
         });
       }
     };
@@ -77,7 +77,7 @@ const ParticleBackground = () => {
         particle.y = Math.max(0, Math.min(canvas.height, particle.y));
 
         // Update color based on theme
-        particle.color = theme === "dark" ? "#60a5fa" : "#3b82f6";
+        particle.color = resolvedTheme === "dark" ? "#60a5fa" : "#3b82f6";
       });
     };
 
@@ -95,7 +95,7 @@ const ParticleBackground = () => {
           if (distance < connectionDistance) {
             const opacity = (1 - distance / connectionDistance) * 0.3;
             ctx.strokeStyle =
-              theme === "dark"
+              resolvedTheme === "dark"
                 ? `rgba(96, 165, 250, ${opacity})`
                 : `rgba(59, 130, 246, ${opacity})`;
             ctx.lineWidth = 1;
@@ -150,7 +150,7 @@ const ParticleBackground = () => {
       }
       window.removeEventListener("resize", handleResize);
     };
-  }, [mounted, theme]);
+  }, [mounted, theme, resolvedTheme]);
 
   if (!mounted) return null;
 

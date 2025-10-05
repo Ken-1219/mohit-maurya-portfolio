@@ -43,7 +43,7 @@ const ProjectCard = ({
     >
       <motion.div
         layout
-        className="bg-white dark:bg-gray-900 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 border border-gray-200 dark:border-gray-700"
+        className="bg-white dark:bg-gray-900 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 border border-gray-200 dark:border-gray-700 h-full flex flex-col"
         whileHover={{ y: -8 }}
         onHoverStart={() => setIsExpanded(true)}
         onHoverEnd={() => setIsExpanded(false)}
@@ -134,7 +134,7 @@ const ProjectCard = ({
         )}
 
         {/* Content Section */}
-        <div className="p-6 sm:p-8">
+        <div className="p-6 sm:p-8 flex-1 flex flex-col">
           {/* Title */}
           <motion.h3
             className="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white mb-3 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors"
@@ -185,7 +185,7 @@ const ProjectCard = ({
           </motion.div>
 
           {/* Technologies */}
-          <motion.div className="mb-6" layout>
+          <motion.div className="mb-6 flex-1" layout>
             <div className="flex flex-wrap gap-2">
               {technologies.map((tech, techIdx) => (
                 <motion.span
@@ -204,7 +204,10 @@ const ProjectCard = ({
 
           {/* Action Links */}
           {(liveLink || githubLink) && (
-            <motion.div className="flex flex-col sm:flex-row gap-3" layout>
+            <motion.div
+              className="flex flex-col sm:flex-row gap-3 mt-auto"
+              layout
+            >
               {liveLink && (
                 <motion.a
                   href={liveLink}
