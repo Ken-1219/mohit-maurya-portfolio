@@ -959,144 +959,249 @@ export default function Portfolio() {
       {/* Contact Section */}
       <section
         id="contact"
-        className="relative min-h-screen flex items-center justify-center py-20 px-4 sm:px-6 lg:px-8 bg-gray-50 dark:bg-gray-800/50 overflow-hidden"
+        className="relative min-h-screen flex items-center justify-center py-20 px-4 sm:px-6 lg:px-8 bg-gray-50 dark:bg-gray-900"
       >
-        {/* Background decoration */}
-        <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute top-1/4 right-0 w-96 h-96 bg-blue-500/5 rounded-full transform translate-x-1/2"></div>
-          <div className="absolute bottom-1/4 left-0 w-96 h-96 bg-purple-500/5 rounded-full transform -translate-x-1/2"></div>
-        </div>
-
-        <div className="relative z-10 max-w-7xl mx-auto">
+        <div className="max-w-6xl mx-auto w-full">
+          {/* Header */}
           <motion.div
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <motion.h2
+            <h2 className="text-3xl sm:text-4xl font-bold mb-4 text-gray-900 dark:text-white">
+              Get In Touch
+            </h2>
+            <div className="w-24 h-1 bg-blue-600 mx-auto mb-6"></div>
+            <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+              Interested in collaborating or have questions about my work?
+              I&apos;d be happy to discuss your project requirements.
+            </p>
+          </motion.div>
+
+          {/* Main Content Grid */}
+          <div className="grid lg:grid-cols-2 gap-12 items-start">
+            {/* Contact Form */}
+            <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="text-4xl sm:text-5xl font-bold mb-6"
+              transition={{ duration: 0.6 }}
             >
-              <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-                Let&apos;s Create Something
-              </span>
-              <br />
-              <span className="text-gray-900 dark:text-white">
-                Amazing Together
-              </span>
-            </motion.h2>
+              <div className="bg-white dark:bg-gray-800 rounded-lg p-8 shadow-lg border border-gray-200 dark:border-gray-700">
+                <h3 className="text-2xl font-semibold mb-2 text-gray-900 dark:text-white">
+                  Send Message
+                </h3>
+                <p className="text-gray-600 dark:text-gray-300 mb-8">
+                  Please fill out the form below and I will respond within 24
+                  hours.
+                </p>
+
+                <form className="space-y-6">
+                  <div className="grid sm:grid-cols-2 gap-6">
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                        First Name *
+                      </label>
+                      <input
+                        type="text"
+                        required
+                        className="w-full px-4 py-3 bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
+                        placeholder="Enter your first name"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                        Last Name *
+                      </label>
+                      <input
+                        type="text"
+                        required
+                        className="w-full px-4 py-3 bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
+                        placeholder="Enter your last name"
+                      />
+                    </div>
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                      Email Address *
+                    </label>
+                    <input
+                      type="email"
+                      required
+                      className="w-full px-4 py-3 bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
+                      placeholder="your@email.com"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                      Company (Optional)
+                    </label>
+                    <input
+                      type="text"
+                      className="w-full px-4 py-3 bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
+                      placeholder="Company name"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                      Subject *
+                    </label>
+                    <input
+                      type="text"
+                      required
+                      className="w-full px-4 py-3 bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
+                      placeholder="Brief project description"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                      Message *
+                    </label>
+                    <textarea
+                      rows={5}
+                      required
+                      className="w-full px-4 py-3 bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors resize-vertical"
+                      placeholder="Please provide details about your project requirements, timeline, and budget..."
+                    ></textarea>
+                  </div>
+
+                  <button
+                    type="submit"
+                    className="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 px-6 rounded-md font-medium transition-colors duration-200 flex items-center justify-center space-x-2"
+                  >
+                    <Mail className="w-5 h-5" />
+                    <span>Send Message</span>
+                  </button>
+                </form>
+              </div>
+            </motion.div>
+
+            {/* Contact Information */}
             <motion.div
-              initial={{ width: 0 }}
-              whileInView={{ width: "6rem" }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.5, duration: 0.8 }}
-              className="h-1 bg-gradient-to-r from-blue-600 to-purple-600 mx-auto mb-8"
-            />
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: 0.3 }}
-              className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed"
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="space-y-8"
             >
-              Ready to turn ideas into reality? I&apos;m always excited to
-              collaborate on innovative projects and discuss new opportunities.
-              Let&apos;s connect and build something extraordinary!
-            </motion.p>
-          </motion.div>
+              {/* Direct Contact */}
+              <div className="bg-white dark:bg-gray-800 rounded-lg p-8 shadow-lg border border-gray-200 dark:border-gray-700">
+                <h3 className="text-xl font-semibold mb-6 text-gray-900 dark:text-white">
+                  Contact Information
+                </h3>
 
-          <div className="grid md:grid-cols-2 gap-8 mb-12">
-            {[
-              {
-                icon: Mail,
-                title: "Email",
-                info: "mohitmaurya78871@gmail.com",
-                href: "mailto:mohitmaurya78871@gmail.com",
-                color: "from-blue-500 to-cyan-500",
-              },
-              {
-                icon: Phone,
-                title: "Phone",
-                info: "+91 888 282 5731",
-                href: "tel:+918882825731",
-                color: "from-green-500 to-emerald-500",
-              },
-              {
-                icon: Linkedin,
-                title: "LinkedIn",
-                info: "Connect with me",
-                href: "https://www.linkedin.com/in/mohit-maurya-9a13a222a/",
-                color: "from-blue-600 to-blue-800",
-              },
-              {
-                icon: Github,
-                title: "GitHub",
-                info: "Check out my code",
-                href: "https://github.com/Ken-1219",
-                color: "from-gray-600 to-gray-800",
-              },
-            ].map((contact, index) => (
-              <motion.a
-                key={index}
-                href={contact.href}
-                target={contact.href.startsWith("http") ? "_blank" : undefined}
-                rel={
-                  contact.href.startsWith("http")
-                    ? "noopener noreferrer"
-                    : undefined
-                }
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                whileHover={{ scale: 1.02, y: -2 }}
-                className="group bg-white dark:bg-gray-900 rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-200 dark:border-gray-700"
-              >
-                <div className="flex items-center space-x-4">
-                  <div
-                    className={`w-12 h-12 rounded-lg bg-gradient-to-r ${contact.color} flex items-center justify-center group-hover:scale-110 transition-transform`}
-                  >
-                    <contact.icon className="w-6 h-6 text-white" />
+                <div className="space-y-4">
+                  <div className="flex items-center space-x-4">
+                    <div className="w-10 h-10 bg-blue-100 dark:bg-blue-900 rounded-lg flex items-center justify-center">
+                      <Mail className="w-5 h-5 text-blue-600 dark:text-blue-400" />
+                    </div>
+                    <div>
+                      <p className="font-medium text-gray-900 dark:text-white">
+                        Email
+                      </p>
+                      <a
+                        href="mailto:mohitmaurya78871@gmail.com"
+                        className="text-blue-600 dark:text-blue-400 hover:underline"
+                      >
+                        mohitmaurya78871@gmail.com
+                      </a>
+                    </div>
                   </div>
-                  <div>
-                    <h3 className="text-lg font-semibold text-gray-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
-                      {contact.title}
-                    </h3>
-                    <p className="text-gray-600 dark:text-gray-300">
-                      {contact.info}
-                    </p>
+
+                  <div className="flex items-center space-x-4">
+                    <div className="w-10 h-10 bg-green-100 dark:bg-green-900 rounded-lg flex items-center justify-center">
+                      <Phone className="w-5 h-5 text-green-600 dark:text-green-400" />
+                    </div>
+                    <div>
+                      <p className="font-medium text-gray-900 dark:text-white">
+                        Phone
+                      </p>
+                      <a
+                        href="tel:+918882825731"
+                        className="text-green-600 dark:text-green-400 hover:underline"
+                      >
+                        +91 888 282 5731
+                      </a>
+                    </div>
                   </div>
                 </div>
-              </motion.a>
-            ))}
-          </div>
+              </div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center"
-          >
-            <div className="bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl p-8 text-white">
-              <h3 className="text-2xl font-bold mb-4">Ready to collaborate?</h3>
-              <p className="mb-6 opacity-90">
-                I&apos;m currently open to new opportunities and exciting
-                projects.
-              </p>
-              <motion.a
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                href="mailto:mohitmaurya78871@gmail.com"
-                className="inline-flex items-center space-x-2 bg-white text-blue-600 px-8 py-3 rounded-full font-semibold hover:bg-gray-100 transition-colors"
-              >
-                <Mail className="w-5 h-5" />
-                <span>Send me a message</span>
-              </motion.a>
-            </div>
-          </motion.div>
+              {/* Professional Networks */}
+              <div className="bg-white dark:bg-gray-800 rounded-lg p-8 shadow-lg border border-gray-200 dark:border-gray-700">
+                <h3 className="text-xl font-semibold mb-6 text-gray-900 dark:text-white">
+                  Professional Networks
+                </h3>
+
+                <div className="space-y-4">
+                  <a
+                    href="https://www.linkedin.com/in/mohit-maurya-9a13a222a/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center space-x-4 p-4 border border-gray-200 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
+                  >
+                    <div className="w-10 h-10 bg-blue-100 dark:bg-blue-900 rounded-lg flex items-center justify-center">
+                      <Linkedin className="w-5 h-5 text-blue-600 dark:text-blue-400" />
+                    </div>
+                    <div>
+                      <p className="font-medium text-gray-900 dark:text-white">
+                        LinkedIn
+                      </p>
+                      <p className="text-sm text-gray-600 dark:text-gray-300">
+                        Professional profile
+                      </p>
+                    </div>
+                  </a>
+
+                  <a
+                    href="https://github.com/Ken-1219"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center space-x-4 p-4 border border-gray-200 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
+                  >
+                    <div className="w-10 h-10 bg-gray-100 dark:bg-gray-700 rounded-lg flex items-center justify-center">
+                      <Github className="w-5 h-5 text-gray-700 dark:text-gray-300" />
+                    </div>
+                    <div>
+                      <p className="font-medium text-gray-900 dark:text-white">
+                        GitHub
+                      </p>
+                      <p className="text-sm text-gray-600 dark:text-gray-300">
+                        Code portfolio
+                      </p>
+                    </div>
+                  </a>
+                </div>
+              </div>
+
+              {/* Availability Status */}
+              <div className="bg-blue-50 dark:bg-blue-900/20 rounded-lg p-6 border border-blue-200 dark:border-blue-800">
+                <div className="flex items-center space-x-3 mb-3">
+                  <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
+                  <h4 className="font-semibold text-gray-900 dark:text-white">
+                    Available for New Projects
+                  </h4>
+                </div>
+                <p className="text-sm text-gray-600 dark:text-gray-300 mb-4">
+                  Currently accepting new client projects and collaborations.
+                  Typical response time: 24-48 hours.
+                </p>
+                <div className="text-sm text-gray-600 dark:text-gray-300">
+                  <p>
+                    <strong>Response Time:</strong> Within 24 hours
+                  </p>
+                  <p>
+                    <strong>Time Zone:</strong> IST (UTC+5:30)
+                  </p>
+                </div>
+              </div>
+            </motion.div>
+          </div>
         </div>
       </section>
 

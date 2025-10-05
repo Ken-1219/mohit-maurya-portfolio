@@ -160,6 +160,10 @@ section {
     animation-delay: 4s;
 }
 
+.animation-delay-1000 {
+    animation-delay: 1s;
+}
+
 /* Enhanced focus states */
 input:focus,
 textarea:focus {
@@ -167,6 +171,14 @@ textarea:focus {
     ring: 2px;
     ring-color: rgb(59 130 246);
     ring-opacity: 0.5;
+}
+
+/* Grid pattern background */
+.bg-grid-pattern {
+    background-image:
+        linear-gradient(rgba(59, 130, 246, 0.1) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(59, 130, 246, 0.1) 1px, transparent 1px);
+    background-size: 20px 20px;
 }
 
 /* Smooth transitions for dark mode */
