@@ -46,7 +46,53 @@ export default function Portfolio() {
   useEffect(() => {
     setMounted(true);
 
+    let ticking = false;
+
     const handleScroll = () => {
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          const sections = [
+            "hero",
+            "about",
+            "experience",
+            "projects",
+            "education",
+            "skills",
+            "contact",
+          ];
+
+          // Find the section that's most visible in viewport
+          let maxVisibleSection = "";
+          let maxVisibleArea = 0;
+
+          sections.forEach((section) => {
+            const element = document.getElementById(section);
+            if (element) {
+              const rect = element.getBoundingClientRect();
+              const viewportHeight = window.innerHeight;
+
+              // Calculate visible area of this section
+              const visibleTop = Math.max(0, rect.top);
+              const visibleBottom = Math.min(viewportHeight, rect.bottom);
+              const visibleArea = Math.max(0, visibleBottom - visibleTop);
+
+              if (visibleArea > maxVisibleArea) {
+                maxVisibleArea = visibleArea;
+                maxVisibleSection = section;
+              }
+            }
+          });
+
+          if (maxVisibleSection && maxVisibleSection !== activeSection) {
+            setActiveSection(maxVisibleSection);
+          }
+          ticking = false;
+        });
+        ticking = true;
+      }
+    };
+
+    const handleKeydown = (e: KeyboardEvent) => {
       const sections = [
         "hero",
         "about",
@@ -56,25 +102,35 @@ export default function Portfolio() {
         "skills",
         "contact",
       ];
-      const currentSection = sections.find((section) => {
-        const element = document.getElementById(section);
-        if (element) {
-          const rect = element.getBoundingClientRect();
-          return rect.top <= 100 && rect.bottom >= 100;
-        }
-        return false;
-      });
-      if (currentSection) {
-        setActiveSection(currentSection);
+
+      const currentIndex = sections.indexOf(activeSection);
+
+      if (e.key === "ArrowDown" && currentIndex < sections.length - 1) {
+        e.preventDefault();
+        scrollToSection(sections[currentIndex + 1]);
+      } else if (e.key === "ArrowUp" && currentIndex > 0) {
+        e.preventDefault();
+        scrollToSection(sections[currentIndex - 1]);
       }
     };
 
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    window.addEventListener("keydown", handleKeydown);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("keydown", handleKeydown);
+    };
+  }, [activeSection]);
 
   const scrollToSection = (sectionId: string) => {
-    document.getElementById(sectionId)?.scrollIntoView({ behavior: "smooth" });
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    }
     setIsMenuOpen(false);
   };
 
@@ -83,13 +139,23 @@ export default function Portfolio() {
   return (
     <div className="bg-white dark:bg-gray-900 text-gray-900 dark:text-white transition-colors duration-300">
       {/* Navigation */}
-      <nav className="fixed top-0 w-full bg-white/80 dark:bg-gray-900/80 backdrop-blur-md z-50 border-b border-gray-200 dark:border-gray-800">
+      <nav
+        className={`fixed top-0 w-full z-50 transition-all duration-500 ${
+          activeSection === "hero"
+            ? "bg-transparent"
+            : "bg-white/90 dark:bg-gray-900/90 backdrop-blur-md border-b border-gray-200/50 dark:border-gray-800/50 shadow-sm"
+        }`}
+      >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center py-4">
             <motion.div
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
-              className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent"
+              className={`text-2xl font-bold transition-all duration-300 ${
+                activeSection === "hero"
+                  ? "text-white drop-shadow-lg"
+                  : "bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent"
+              }`}
             >
               MM
             </motion.div>
@@ -111,13 +177,29 @@ export default function Portfolio() {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: index * 0.1 }}
                   onClick={() => scrollToSection(item.id)}
-                  className={`text-sm font-medium transition-colors hover:text-blue-600 dark:hover:text-blue-400 ${
-                    activeSection === item.id
-                      ? "text-blue-600 dark:text-blue-400"
-                      : ""
+                  className={`text-sm font-medium transition-all duration-300 relative ${
+                    activeSection === "hero"
+                      ? activeSection === item.id
+                        ? "text-white font-semibold drop-shadow-lg"
+                        : "text-white/90 hover:text-white drop-shadow-md"
+                      : activeSection === item.id
+                        ? "text-blue-600 dark:text-blue-400"
+                        : "text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400"
                   }`}
                 >
                   {item.label}
+                  {activeSection === item.id && (
+                    <motion.div
+                      layoutId="activeIndicator"
+                      className="absolute -bottom-1 left-0 right-0 h-0.5 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full"
+                      initial={false}
+                      transition={{
+                        type: "spring",
+                        stiffness: 500,
+                        damping: 30,
+                      }}
+                    />
+                  )}
                 </motion.button>
               ))}
             </div>
@@ -125,7 +207,11 @@ export default function Portfolio() {
             <div className="flex items-center space-x-4">
               {/* Mobile Menu Button */}
               <button
-                className="md:hidden p-2"
+                className={`md:hidden p-2 transition-colors duration-300 ${
+                  activeSection === "hero"
+                    ? "text-white hover:text-white/80"
+                    : "text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400"
+                }`}
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
               >
                 {isMenuOpen ? (
@@ -145,7 +231,11 @@ export default function Portfolio() {
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: "auto" }}
               exit={{ opacity: 0, height: 0 }}
-              className="md:hidden bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-800"
+              className={`md:hidden border-t transition-all duration-300 ${
+                activeSection === "hero"
+                  ? "bg-black/80 backdrop-blur-md border-white/20"
+                  : "bg-white dark:bg-gray-900 border-gray-200 dark:border-gray-800"
+              }`}
             >
               <div className="px-4 py-2 space-y-2">
                 {[
@@ -160,9 +250,20 @@ export default function Portfolio() {
                   <button
                     key={item.id}
                     onClick={() => scrollToSection(item.id)}
-                    className="block w-full text-left px-3 py-2 text-base font-medium hover:text-blue-600 dark:hover:text-blue-400"
+                    className={`block w-full text-left px-3 py-2 text-base font-medium transition-all duration-300 relative ${
+                      activeSection === "hero"
+                        ? activeSection === item.id
+                          ? "text-white font-semibold bg-white/10"
+                          : "text-white/90 hover:text-white hover:bg-white/5"
+                        : activeSection === item.id
+                          ? "text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/20"
+                          : "text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400"
+                    }`}
                   >
                     {item.label}
+                    {activeSection === item.id && (
+                      <div className="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-blue-600 to-purple-600 rounded-r" />
+                    )}
                   </button>
                 ))}
               </div>
@@ -294,7 +395,10 @@ export default function Portfolio() {
       </section>
 
       {/* About Section */}
-      <section id="about" className="py-20 px-4 sm:px-6 lg:px-8">
+      <section
+        id="about"
+        className="min-h-screen flex items-center justify-center py-20 px-4 sm:px-6 lg:px-8"
+      >
         <div className="max-w-6xl mx-auto">
           <motion.div
             initial={{ opacity: 0 }}
@@ -376,7 +480,7 @@ export default function Portfolio() {
       {/* Experience Section */}
       <section
         id="experience"
-        className="py-20 px-4 sm:px-6 lg:px-8 bg-gray-50 dark:bg-gray-800/50"
+        className="min-h-screen flex items-center justify-center py-20 px-4 sm:px-6 lg:px-8 bg-gray-50 dark:bg-gray-800/50"
       >
         <div className="max-w-7xl mx-auto">
           <motion.div
@@ -457,7 +561,10 @@ export default function Portfolio() {
       </section>
 
       {/* Projects Section */}
-      <section id="projects" className="py-20 px-4 sm:px-6 lg:px-8">
+      <section
+        id="projects"
+        className="min-h-screen flex items-center justify-center py-20 px-4 sm:px-6 lg:px-8"
+      >
         <div className="max-w-6xl mx-auto">
           <motion.div
             initial={{ opacity: 0 }}
@@ -520,7 +627,7 @@ export default function Portfolio() {
       {/* Education Section */}
       <section
         id="education"
-        className="py-20 px-4 sm:px-6 lg:px-8 bg-gray-50 dark:bg-gray-800/50"
+        className="min-h-screen flex items-center justify-center py-20 px-4 sm:px-6 lg:px-8 bg-gray-50 dark:bg-gray-800/50"
       >
         <div className="max-w-7xl mx-auto">
           <motion.div
@@ -590,7 +697,10 @@ export default function Portfolio() {
       </section>
 
       {/* Skills Section */}
-      <section id="skills" className="py-20 px-4 sm:px-6 lg:px-8">
+      <section
+        id="skills"
+        className="min-h-screen flex items-center justify-center py-20 px-4 sm:px-6 lg:px-8"
+      >
         <div className="max-w-7xl mx-auto">
           <motion.div
             initial={{ opacity: 0 }}
@@ -731,7 +841,7 @@ export default function Portfolio() {
       {/* Contact Section */}
       <section
         id="contact"
-        className="py-20 px-4 sm:px-6 lg:px-8 bg-gray-50 dark:bg-gray-800/50"
+        className="min-h-screen flex items-center justify-center py-20 px-4 sm:px-6 lg:px-8 bg-gray-50 dark:bg-gray-800/50"
       >
         <div className="max-w-4xl mx-auto">
           <motion.div

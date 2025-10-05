@@ -66,3 +66,37 @@ body {
     background: rgba(59, 130, 246, 0.3);
     color: var(--foreground);
 }
+
+/* Enhanced smooth scrolling */
+@media (prefers-reduced-motion: no-preference) {
+    html {
+        scroll-behavior: smooth;
+    }
+}
+
+/* Subtle scroll enhancements without aggressive snap */
+html {
+    scroll-padding-top: 80px;
+}
+
+/* Improve scroll performance */
+* {
+    scroll-behavior: smooth;
+}
+
+/* Better touch scrolling on mobile */
+@supports (-webkit-overflow-scrolling: touch) {
+    body {
+        -webkit-overflow-scrolling: touch;
+    }
+}
+
+/* Prevent scroll bounce on iOS */
+body {
+    overscroll-behavior-y: none;
+}
+
+/* Smooth section transitions */
+section {
+    scroll-margin-top: 80px;
+}

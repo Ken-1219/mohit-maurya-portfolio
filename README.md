@@ -1,6 +1,6 @@
 # 🚀 Modern Portfolio Website
 
-A stunning, fully responsive portfolio website built with **Next.js 15**, **TypeScript**, **Tailwind CSS**, and **Framer Motion**. Features a modern design with dark/light theme support, animated components, and interactive elements.
+A stunning, fully responsive portfolio website built with **Next.js 15**, **TypeScript**, **Tailwind CSS**, and **Framer Motion**. Features a modern design with dark/light theme support, animated components, interactive elements, and smooth full-screen scroll snap sections for an immersive user experience.
 
 ![Portfolio Preview](https://img.shields.io/badge/Status-Live-success?style=for-the-badge)
 ![Next.js](https://img.shields.io/badge/Next.js-15.5.4-black?style=for-the-badge&logo=next.js)
@@ -23,6 +23,10 @@ A stunning, fully responsive portfolio website built with **Next.js 15**, **Type
 - **Typewriter Effect** - Animated typing effect in hero section
 - **Scroll Animations** - Elements animate on scroll with Intersection Observer
 - **Smooth Scrolling** - Buttery smooth navigation between sections
+- **Full-Screen Sections** - Each section takes full viewport height for immersive experience
+- **Keyboard Navigation** - Navigate sections using arrow keys (up/down)
+- **Transparent Navigation** - Navbar seamlessly merges with hero section, becomes opaque on scroll
+- **Smart Section Detection** - Active section highlighting based on viewport visibility
 
 ### 📊 Dynamic Content
 - **Animated Counters** - Stats that count up when scrolled into view
