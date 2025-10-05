@@ -147,19 +147,7 @@ export default function Portfolio() {
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center py-4">
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              className={`text-2xl font-bold transition-all duration-300 ${
-                activeSection === "hero"
-                  ? "text-white drop-shadow-lg"
-                  : "bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent"
-              }`}
-            >
-              MM
-            </motion.div>
-
+          <div className="flex justify-center items-center py-4">
             {/* Desktop Navigation */}
             <div className="hidden md:flex space-x-8">
               {[
@@ -207,17 +195,17 @@ export default function Portfolio() {
             <div className="flex items-center space-x-4">
               {/* Mobile Menu Button */}
               <button
-                className={`md:hidden p-2 transition-colors duration-300 ${
+                className={`md:hidden p-3 -mr-2 touch-manipulation transition-colors duration-300 ${
                   activeSection === "hero"
-                    ? "text-white hover:text-white/80"
-                    : "text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400"
-                }`}
+                    ? "text-white hover:text-white/80 active:bg-white/10"
+                    : "text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 active:bg-gray-100 dark:active:bg-gray-800"
+                } rounded-lg`}
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
               >
                 {isMenuOpen ? (
-                  <X className="w-6 h-6" />
+                  <X className="w-7 h-7" />
                 ) : (
-                  <Menu className="w-6 h-6" />
+                  <Menu className="w-7 h-7" />
                 )}
               </button>
             </div>
@@ -237,7 +225,7 @@ export default function Portfolio() {
                   : "bg-white dark:bg-gray-900 border-gray-200 dark:border-gray-800"
               }`}
             >
-              <div className="px-4 py-2 space-y-2">
+              <div className="px-4 py-4 space-y-1">
                 {[
                   { id: "hero", label: "Home" },
                   { id: "about", label: "About" },
@@ -250,14 +238,14 @@ export default function Portfolio() {
                   <button
                     key={item.id}
                     onClick={() => scrollToSection(item.id)}
-                    className={`block w-full text-left px-3 py-2 text-base font-medium transition-all duration-300 relative ${
+                    className={`block w-full text-left px-4 py-3 text-base font-medium transition-all duration-300 relative touch-manipulation rounded-lg ${
                       activeSection === "hero"
                         ? activeSection === item.id
-                          ? "text-white font-semibold bg-white/10"
-                          : "text-white/90 hover:text-white hover:bg-white/5"
+                          ? "text-white font-semibold bg-white/15"
+                          : "text-white/90 hover:text-white hover:bg-white/10 active:bg-white/15"
                         : activeSection === item.id
                           ? "text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/20"
-                          : "text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400"
+                          : "text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-gray-50 dark:hover:bg-gray-800/50 active:bg-gray-100 dark:active:bg-gray-800"
                     }`}
                   >
                     {item.label}
@@ -275,7 +263,7 @@ export default function Portfolio() {
       {/* Hero Section */}
       <section
         id="hero"
-        className="relative min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 overflow-hidden"
+        className="relative min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 overflow-hidden pt-16 sm:pt-20"
       >
         {/* Animated Background */}
         <div className="absolute inset-0 overflow-hidden">
@@ -312,15 +300,17 @@ export default function Portfolio() {
             transition={{ duration: 1.2, ease: "easeOut" }}
             className="relative mb-8"
           >
-            <div className="relative w-40 h-40 mx-auto">
+            <div className="relative w-28 h-28 sm:w-32 sm:h-32 md:w-40 md:h-40 mx-auto">
               {/* Rotating border */}
               <div className="absolute inset-0 rounded-full bg-gradient-to-r from-blue-500 via-purple-500 to-indigo-500 animate-spin-slow p-1">
                 <div className="w-full h-full rounded-full bg-white dark:bg-gray-900"></div>
               </div>
 
               {/* Avatar */}
-              <div className="absolute inset-2 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center text-4xl font-bold text-white shadow-2xl">
-                <span className="text-5xl">MM</span>
+              <div className="absolute inset-2 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center font-bold text-white shadow-2xl">
+                <span className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl">
+                  MM
+                </span>
               </div>
 
               {/* Status indicator */}
@@ -333,7 +323,7 @@ export default function Portfolio() {
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3, duration: 0.8, ease: "easeOut" }}
-            className="text-3xl sm:text-4xl lg:text-6xl font-bold mb-6 tracking-tight"
+            className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold mb-4 sm:mb-6 tracking-tight px-2"
           >
             <motion.span
               className="inline-block bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600 bg-clip-text text-transparent"
@@ -356,7 +346,7 @@ export default function Portfolio() {
           <motion.div
             {...fadeInUp}
             transition={{ delay: 0.4, duration: 0.6, ease: "easeOut" }}
-            className="text-xl sm:text-2xl text-gray-600 dark:text-gray-300 mb-8 max-w-2xl mx-auto h-16 flex items-center justify-center"
+            className="text-lg sm:text-xl md:text-2xl text-gray-600 dark:text-gray-300 mb-6 sm:mb-8 max-w-2xl mx-auto h-12 sm:h-16 flex items-center justify-center px-4"
           >
             <TypewriterEffect
               words={[
@@ -378,7 +368,7 @@ export default function Portfolio() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.7, duration: 0.8, ease: "easeOut" }}
-            className="text-lg text-gray-500 dark:text-gray-400 mb-12 max-w-2xl mx-auto leading-relaxed"
+            className="text-base sm:text-lg text-gray-500 dark:text-gray-400 mb-8 sm:mb-12 max-w-xl sm:max-w-2xl mx-auto leading-relaxed px-4"
           >
             Crafting digital experiences that bridge innovation and
             functionality. Let&apos;s build something amazing together.
@@ -389,7 +379,7 @@ export default function Portfolio() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.9, duration: 0.8, ease: "easeOut" }}
-            className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-16"
+            className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center items-center mb-12 sm:mb-16 px-4"
           >
             <motion.a
               whileHover={{
@@ -402,7 +392,7 @@ export default function Portfolio() {
                 e.preventDefault();
                 scrollToSection("contact");
               }}
-              className="group relative bg-gradient-to-r from-blue-600 to-purple-600 text-white px-10 py-4 rounded-full font-semibold shadow-xl hover:shadow-2xl transition-all flex items-center space-x-3 overflow-hidden"
+              className="group relative bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 sm:px-8 lg:px-10 py-3 sm:py-4 rounded-full font-semibold shadow-xl hover:shadow-2xl transition-all flex items-center space-x-2 sm:space-x-3 overflow-hidden w-full sm:w-auto justify-center"
             >
               <div className="absolute inset-0 bg-gradient-to-r from-purple-600 to-blue-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               <span className="relative z-10">Let&apos;s Connect</span>
@@ -417,7 +407,7 @@ export default function Portfolio() {
                 boxShadow: "0 20px 40px rgba(59, 130, 246, 0.2)",
               }}
               whileTap={{ scale: 0.95 }}
-              className="group border-2 border-blue-600 text-blue-600 dark:text-blue-400 px-10 py-4 rounded-full font-semibold transition-all flex items-center space-x-3 backdrop-blur-sm bg-white/10 hover:bg-blue-600 hover:border-blue-600"
+              className="group border-2 border-blue-600 text-blue-600 dark:text-blue-400 px-6 sm:px-8 lg:px-10 py-3 sm:py-4 rounded-full font-semibold transition-all flex items-center space-x-2 sm:space-x-3 backdrop-blur-sm bg-white/10 hover:bg-blue-600 hover:border-blue-600 w-full sm:w-auto justify-center"
             >
               <Download className="w-5 h-5 group-hover:animate-bounce" />
               <span>Download Resume</span>
@@ -429,7 +419,7 @@ export default function Portfolio() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 1.1, duration: 0.8, ease: "easeOut" }}
-            className="flex justify-center space-x-8"
+            className="flex justify-center space-x-4 sm:space-x-6 lg:space-x-8"
           >
             {[
               {
@@ -475,7 +465,7 @@ export default function Portfolio() {
                     ? "noopener noreferrer"
                     : undefined
                 }
-                className={`group p-4 bg-gradient-to-r ${social.color} rounded-2xl text-white shadow-lg hover:shadow-xl transition-all duration-300`}
+                className={`group p-4 bg-gradient-to-r ${social.color} rounded-2xl text-white shadow-lg hover:shadow-xl transition-all duration-300 bg-gray-800`}
                 aria-label={social.label}
               >
                 <social.icon className="w-6 h-6 group-hover:scale-110 transition-transform" />
@@ -515,7 +505,7 @@ export default function Portfolio() {
       {/* About Section */}
       <section
         id="about"
-        className="min-h-screen flex items-center justify-center py-20 px-4 sm:px-6 lg:px-8"
+        className="min-h-screen flex items-center justify-center py-16 sm:py-20 px-4 sm:px-6 lg:px-8"
       >
         <div className="max-w-6xl mx-auto">
           <motion.div
@@ -523,26 +513,28 @@ export default function Portfolio() {
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className="text-center mb-16"
+            className="text-center mb-12 sm:mb-16"
           >
-            <h2 className="text-3xl sm:text-4xl font-bold mb-4">About Me</h2>
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-4">
+              About Me
+            </h2>
             <div className="w-24 h-1 bg-gradient-to-r from-blue-600 to-purple-600 mx-auto"></div>
           </motion.div>
 
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
+          <div className="grid md:grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 items-center">
             <motion.div
               {...fadeInUp}
               transition={{ duration: 0.6, ease: "easeOut" }}
-              className="space-y-6"
+              className="space-y-4 sm:space-y-6"
             >
-              <p className="text-lg leading-relaxed text-gray-600 dark:text-gray-300">
+              <p className="text-base sm:text-lg leading-relaxed text-gray-600 dark:text-gray-300">
                 I&apos;m a passionate Full Stack Developer and Founding Engineer
                 at ContraVault AI, where I architected end-to-end solutions and
                 improved feature accuracy from 43% to 94%. My expertise spans
                 modern web technologies, cloud infrastructure, and scalable
                 system design.
               </p>
-              <p className="text-lg leading-relaxed text-gray-600 dark:text-gray-300">
+              <p className="text-base sm:text-lg leading-relaxed text-gray-600 dark:text-gray-300">
                 Currently pursuing B.Tech in ECE with IoT specialization from
                 Netaji Subhas University of Technology. I have a strong
                 foundation in both frontend and backend development, with
@@ -589,7 +581,7 @@ export default function Portfolio() {
                   delay: 0.6,
                 },
               ]}
-              className="grid grid-cols-2 gap-6 w-full"
+              className="grid grid-cols-2 gap-4 sm:gap-6 w-full mt-8 lg:mt-0"
             />
           </div>
         </div>
@@ -598,18 +590,20 @@ export default function Portfolio() {
       {/* Experience Section */}
       <section
         id="experience"
-        className="min-h-screen flex items-center justify-center py-20 px-4 sm:px-6 lg:px-8 bg-gray-50 dark:bg-gray-800/50"
+        className="min-h-screen flex items-center justify-center py-16 sm:py-20 px-4 sm:px-6 lg:px-8 bg-gray-50 dark:bg-gray-800/50"
       >
         <div className="w-full mx-auto">
           <motion.div
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
-            className="text-center mb-16"
+            className="text-center mb-12 sm:mb-16"
           >
-            <h2 className="text-3xl sm:text-4xl font-bold mb-4">My Journey</h2>
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-4">
+              My Journey
+            </h2>
             <div className="w-24 h-1 bg-gradient-to-r from-blue-600 to-purple-600 mx-auto mb-6"></div>
-            <p className="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+            <p className="text-sm sm:text-base text-gray-600 dark:text-gray-300 max-w-xl sm:max-w-2xl mx-auto px-4">
               From aspiring developer to founding engineer, here&apos;s my
               professional journey of growth, learning, and impact.
             </p>
@@ -681,22 +675,22 @@ export default function Portfolio() {
       {/* Projects Section */}
       <section
         id="projects"
-        className="min-h-screen flex items-center justify-center py-20 px-4 sm:px-6 lg:px-8"
+        className="min-h-screen flex items-center justify-center py-16 sm:py-20 px-4 sm:px-6 lg:px-8"
       >
         <div className="max-w-6xl mx-auto">
           <motion.div
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
-            className="text-center mb-16"
+            className="text-center mb-12 sm:mb-16"
           >
-            <h2 className="text-3xl sm:text-4xl font-bold mb-4">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-4">
               Featured Projects
             </h2>
             <div className="w-24 h-1 bg-gradient-to-r from-blue-600 to-purple-600 mx-auto"></div>
           </motion.div>
 
-          <div className="grid lg:grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8">
             <ProjectCard
               title="Anime Sphere"
               description="Full-stack platform for anime enthusiasts with features like search, favorites, trailers, and synopsis viewing. Integrated Firebase Authentication for secure user login."
@@ -745,18 +739,20 @@ export default function Portfolio() {
       {/* Education Section */}
       <section
         id="education"
-        className="min-h-screen flex items-center justify-center py-20 px-4 sm:px-6 lg:px-8 bg-gray-50 dark:bg-gray-800/50"
+        className="min-h-screen flex items-center justify-center py-16 sm:py-20 px-4 sm:px-6 lg:px-8 bg-gray-50 dark:bg-gray-800/50"
       >
         <div className="max-w-7xl mx-auto">
           <motion.div
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
-            className="text-center mb-16"
+            className="text-center mb-12 sm:mb-16"
           >
-            <h2 className="text-3xl sm:text-4xl font-bold mb-4">Education</h2>
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-4">
+              Education
+            </h2>
             <div className="w-24 h-1 bg-gradient-to-r from-blue-600 to-purple-600 mx-auto mb-6"></div>
-            <p className="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+            <p className="text-sm sm:text-base text-gray-600 dark:text-gray-300 max-w-xl sm:max-w-2xl mx-auto px-4">
               My academic journey has been focused on building a strong
               foundation in technology and engineering principles.
             </p>
@@ -817,20 +813,20 @@ export default function Portfolio() {
       {/* Skills Section */}
       <section
         id="skills"
-        className="min-h-screen flex items-center justify-center py-20 px-4 sm:px-6 lg:px-8"
+        className="min-h-screen flex items-center justify-center py-16 sm:py-20 px-4 sm:px-6 lg:px-8"
       >
         <div className="max-w-7xl mx-auto">
           <motion.div
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
-            className="text-center mb-16"
+            className="text-center mb-12 sm:mb-16"
           >
-            <h2 className="text-3xl sm:text-4xl font-bold mb-4">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-4">
               Skills & Technologies
             </h2>
             <div className="w-24 h-1 bg-gradient-to-r from-blue-600 to-purple-600 mx-auto mb-6"></div>
-            <p className="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+            <p className="text-sm sm:text-base text-gray-600 dark:text-gray-300 max-w-xl sm:max-w-2xl mx-auto px-4">
               A comprehensive overview of my technical expertise and the tools I
               use to build amazing digital experiences.
             </p>
@@ -841,7 +837,7 @@ export default function Portfolio() {
             initial="initial"
             whileInView="animate"
             viewport={{ once: true }}
-            className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6"
           >
             {[
               {
@@ -906,7 +902,7 @@ export default function Portfolio() {
               <motion.div
                 key={index}
                 variants={fadeInUp}
-                className="group bg-white dark:bg-gray-900 rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-200 dark:border-gray-700 hover:border-transparent"
+                className="group bg-white dark:bg-gray-900 rounded-2xl p-4 sm:p-6 shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-200 dark:border-gray-700 hover:border-transparent"
               >
                 {/* Background Gradient */}
                 <div
@@ -915,18 +911,18 @@ export default function Portfolio() {
 
                 {/* Content */}
                 <div className="relative z-10">
-                  <div className="flex items-center mb-4">
+                  <div className="flex items-center mb-3 sm:mb-4">
                     <div
-                      className={`w-10 h-10 rounded-xl bg-gradient-to-r ${skillGroup.color} flex items-center justify-center mr-4 group-hover:scale-110 transition-transform shadow-lg`}
+                      className={`w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-gradient-to-r ${skillGroup.color} flex items-center justify-center mr-3 sm:mr-4 group-hover:scale-110 transition-transform shadow-lg`}
                     >
-                      <skillGroup.icon className="w-5 h-5 text-white" />
+                      <skillGroup.icon className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
                     </div>
-                    <h3 className="text-lg font-bold text-gray-900 dark:text-white group-hover:text-transparent group-hover:bg-gradient-to-r group-hover:from-blue-600 group-hover:to-purple-600 group-hover:bg-clip-text transition-all duration-300">
+                    <h3 className="text-base sm:text-lg font-bold text-gray-900 dark:text-white group-hover:text-transparent group-hover:bg-gradient-to-r group-hover:from-blue-600 group-hover:to-purple-600 group-hover:bg-clip-text transition-all duration-300">
                       {skillGroup.category}
                     </h3>
                   </div>
 
-                  <div className="grid grid-cols-1 gap-2">
+                  <div className="grid grid-cols-1 gap-1.5 sm:gap-2">
                     {skillGroup.skills.map((skill, skillIdx) => (
                       <motion.div
                         key={skillIdx}
@@ -940,7 +936,7 @@ export default function Portfolio() {
                         <div
                           className={`w-1.5 h-1.5 rounded-full bg-gradient-to-r ${skillGroup.color} mr-3 flex-shrink-0 group-hover/skill:scale-150 transition-transform`}
                         />
-                        <span className="text-sm text-gray-600 dark:text-gray-300 group-hover/skill:text-gray-900 dark:group-hover/skill:text-white transition-colors font-medium">
+                        <span className="text-xs sm:text-sm text-gray-600 dark:text-gray-300 group-hover/skill:text-gray-900 dark:group-hover/skill:text-white transition-colors font-medium">
                           {skill}
                         </span>
                       </motion.div>
@@ -959,7 +955,7 @@ export default function Portfolio() {
       {/* Contact Section */}
       <section
         id="contact"
-        className="relative min-h-screen flex items-center justify-center py-20 px-4 sm:px-6 lg:px-8 bg-gray-50 dark:bg-gray-900"
+        className="min-h-screen flex items-center justify-center py-16 sm:py-20 px-4 sm:px-6 lg:px-8 bg-gray-50 dark:bg-gray-800/50"
       >
         <div className="max-w-6xl mx-auto w-full">
           {/* Header */}
@@ -967,20 +963,20 @@ export default function Portfolio() {
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
-            className="text-center mb-16"
+            className="text-center mb-12 sm:mb-16"
           >
-            <h2 className="text-3xl sm:text-4xl font-bold mb-4 text-gray-900 dark:text-white">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-4 text-gray-900 dark:text-white">
               Get In Touch
             </h2>
             <div className="w-24 h-1 bg-blue-600 mx-auto mb-6"></div>
-            <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+            <p className="text-base sm:text-lg text-gray-600 dark:text-gray-300 max-w-xl sm:max-w-2xl mx-auto px-4">
               Interested in collaborating or have questions about my work?
               I&apos;d be happy to discuss your project requirements.
             </p>
           </motion.div>
 
           {/* Main Content Grid */}
-          <div className="grid lg:grid-cols-2 gap-12 items-start">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 items-start">
             {/* Contact Form */}
             <motion.div
               initial={{ opacity: 0, y: 30 }}
@@ -988,17 +984,17 @@ export default function Portfolio() {
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
             >
-              <div className="bg-white dark:bg-gray-800 rounded-lg p-8 shadow-lg border border-gray-200 dark:border-gray-700">
-                <h3 className="text-2xl font-semibold mb-2 text-gray-900 dark:text-white">
+              <div className="bg-white dark:bg-gray-800 rounded-lg p-6 sm:p-8 shadow-lg border border-gray-200 dark:border-gray-700">
+                <h3 className="text-xl sm:text-2xl font-semibold mb-2 text-gray-900 dark:text-white">
                   Send Message
                 </h3>
-                <p className="text-gray-600 dark:text-gray-300 mb-8">
+                <p className="text-sm sm:text-base text-gray-600 dark:text-gray-300 mb-6 sm:mb-8">
                   Please fill out the form below and I will respond within 24
                   hours.
                 </p>
 
-                <form className="space-y-6">
-                  <div className="grid sm:grid-cols-2 gap-6">
+                <form className="space-y-4 sm:space-y-6">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
                     <div>
                       <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                         First Name *
@@ -1006,7 +1002,7 @@ export default function Portfolio() {
                       <input
                         type="text"
                         required
-                        className="w-full px-4 py-3 bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
+                        className="w-full px-3 sm:px-4 py-2.5 sm:py-3 bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors text-sm sm:text-base"
                         placeholder="Enter your first name"
                       />
                     </div>
@@ -1017,7 +1013,7 @@ export default function Portfolio() {
                       <input
                         type="text"
                         required
-                        className="w-full px-4 py-3 bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
+                        className="w-full px-3 sm:px-4 py-2.5 sm:py-3 bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors text-sm sm:text-base"
                         placeholder="Enter your last name"
                       />
                     </div>
@@ -1030,7 +1026,7 @@ export default function Portfolio() {
                     <input
                       type="email"
                       required
-                      className="w-full px-4 py-3 bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
+                      className="w-full px-3 sm:px-4 py-2.5 sm:py-3 bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors text-sm sm:text-base"
                       placeholder="your@email.com"
                     />
                   </div>
@@ -1041,7 +1037,7 @@ export default function Portfolio() {
                     </label>
                     <input
                       type="text"
-                      className="w-full px-4 py-3 bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
+                      className="w-full px-3 sm:px-4 py-2.5 sm:py-3 bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors text-sm sm:text-base"
                       placeholder="Company name"
                     />
                   </div>
@@ -1053,7 +1049,7 @@ export default function Portfolio() {
                     <input
                       type="text"
                       required
-                      className="w-full px-4 py-3 bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
+                      className="w-full px-3 sm:px-4 py-2.5 sm:py-3 bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors text-sm sm:text-base"
                       placeholder="Brief project description"
                     />
                   </div>
@@ -1063,18 +1059,18 @@ export default function Portfolio() {
                       Message *
                     </label>
                     <textarea
-                      rows={5}
+                      rows={4}
                       required
-                      className="w-full px-4 py-3 bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors resize-vertical"
+                      className="w-full px-3 sm:px-4 py-2.5 sm:py-3 bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors resize-vertical text-sm sm:text-base min-h-[100px] sm:min-h-[120px]"
                       placeholder="Please provide details about your project requirements, timeline, and budget..."
                     ></textarea>
                   </div>
 
                   <button
                     type="submit"
-                    className="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 px-6 rounded-md font-medium transition-colors duration-200 flex items-center justify-center space-x-2"
+                    className="w-full bg-blue-600 hover:bg-blue-700 text-white py-2.5 sm:py-3 px-6 rounded-md font-medium transition-colors duration-200 flex items-center justify-center space-x-2 text-sm sm:text-base"
                   >
-                    <Mail className="w-5 h-5" />
+                    <Mail className="w-4 h-4 sm:w-5 sm:h-5" />
                     <span>Send Message</span>
                   </button>
                 </form>
@@ -1087,11 +1083,11 @@ export default function Portfolio() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="space-y-8"
+              className="space-y-6 sm:space-y-8"
             >
               {/* Direct Contact */}
-              <div className="bg-white dark:bg-gray-800 rounded-lg p-8 shadow-lg border border-gray-200 dark:border-gray-700">
-                <h3 className="text-xl font-semibold mb-6 text-gray-900 dark:text-white">
+              <div className="bg-white dark:bg-gray-800 rounded-lg p-6 sm:p-8 shadow-lg border border-gray-200 dark:border-gray-700">
+                <h3 className="text-lg sm:text-xl font-semibold mb-4 sm:mb-6 text-gray-900 dark:text-white">
                   Contact Information
                 </h3>
 

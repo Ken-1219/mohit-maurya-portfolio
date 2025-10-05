@@ -9,7 +9,6 @@ import {
   Briefcase,
   TrendingUp,
   ChevronDown,
-  ChevronUp,
 } from "lucide-react";
 
 interface ExperienceItem {
@@ -36,18 +35,18 @@ const ExperienceTimeline = ({ experiences }: ExperienceTimelineProps) => {
   return (
     <div className="relative max-w-6xl mx-auto">
       {/* Timeline Line */}
-      <div className="absolute left-8 md:left-1/2 top-0 bottom-0 w-1 bg-gradient-to-b from-blue-500 via-purple-500 to-indigo-500 rounded-full transform md:-translate-x-1/2 opacity-30"></div>
+      <div className="absolute left-6 sm:left-8 md:left-1/2 top-0 bottom-0 w-0.5 sm:w-1 bg-gradient-to-b from-blue-500 via-purple-500 to-indigo-500 rounded-full transform md:-translate-x-1/2 opacity-30"></div>
 
       {/* Animated Timeline Line */}
       <motion.div
-        className="absolute left-8 md:left-1/2 top-0 w-1 bg-gradient-to-b from-blue-500 via-purple-500 to-indigo-500 rounded-full transform md:-translate-x-1/2"
+        className="absolute left-6 sm:left-8 md:left-1/2 top-0 w-0.5 sm:w-1 bg-gradient-to-b from-blue-500 via-purple-500 to-indigo-500 rounded-full transform md:-translate-x-1/2"
         initial={{ height: 0 }}
         whileInView={{ height: "100%" }}
         viewport={{ once: true }}
         transition={{ duration: 2, ease: "easeInOut" }}
       />
 
-      <div className="space-y-12">
+      <div className="space-y-8 sm:space-y-12">
         {experiences.map((experience, index) => (
           <motion.div
             key={index}
@@ -60,7 +59,7 @@ const ExperienceTimeline = ({ experiences }: ExperienceTimelineProps) => {
             }`}
           >
             {/* Timeline Dot */}
-            <div className="absolute left-8 md:left-1/2 transform -translate-x-1/2 z-20">
+            <div className="absolute left-6 sm:left-8 md:left-1/2 transform -translate-x-1/2 z-20">
               <motion.div
                 initial={{ scale: 0, rotate: 0 }}
                 whileInView={{ scale: 1, rotate: 360 }}
@@ -69,15 +68,15 @@ const ExperienceTimeline = ({ experiences }: ExperienceTimelineProps) => {
                 className="relative"
               >
                 {/* Outer Ring */}
-                <div className="w-16 h-16 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 p-1 shadow-lg">
+                <div className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 p-1 shadow-lg">
                   <div className="w-full h-full bg-white dark:bg-gray-900 rounded-full flex items-center justify-center">
-                    <Briefcase className="w-6 h-6 text-blue-600 dark:text-blue-400" />
+                    <Briefcase className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 text-blue-600 dark:text-blue-400" />
                   </div>
                 </div>
 
                 {/* Pulse Ring */}
                 <motion.div
-                  className="absolute inset-0 rounded-full border-4 border-blue-500"
+                  className="absolute inset-0 rounded-full border-2 sm:border-4 border-blue-500"
                   animate={{
                     scale: [1, 1.2, 1],
                     opacity: [0.7, 0, 0.7],
@@ -93,7 +92,7 @@ const ExperienceTimeline = ({ experiences }: ExperienceTimelineProps) => {
 
             {/* Experience Card */}
             <div
-              className={`w-full md:w-5/12 ml-20 md:ml-0 ${
+              className={`w-full md:w-5/12 ml-16 sm:ml-20 md:ml-0 ${
                 index % 2 === 0 ? "md:mr-auto md:pr-12" : "md:ml-auto md:pl-12"
               }`}
             >
@@ -110,10 +109,10 @@ const ExperienceTimeline = ({ experiences }: ExperienceTimelineProps) => {
                 {/* Content */}
                 <div className="relative z-10">
                   {/* Collapsed Header */}
-                  <div className="p-6">
-                    <div className="flex items-center justify-between">
-                      <div className="flex-1">
-                        <div className="flex flex-wrap items-center gap-2 mb-2">
+                  <div className="p-4 sm:p-6">
+                    <div className="flex items-start sm:items-center justify-between">
+                      <div className="flex-1 min-w-0">
+                        <div className="flex flex-wrap items-center gap-1.5 sm:gap-2 mb-2">
                           <span className="px-2 py-1 text-xs font-semibold bg-blue-100 dark:bg-blue-900/50 text-blue-800 dark:text-blue-200 rounded-full">
                             {experience.type}
                           </span>
@@ -124,15 +123,15 @@ const ExperienceTimeline = ({ experiences }: ExperienceTimelineProps) => {
                           )}
                         </div>
 
-                        <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-1 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+                        <h3 className="text-base sm:text-lg font-bold text-gray-900 dark:text-white mb-1 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors leading-tight">
                           {experience.title}
                         </h3>
 
-                        <p className="text-base font-semibold text-blue-600 dark:text-blue-400 mb-2">
+                        <p className="text-sm sm:text-base font-semibold text-blue-600 dark:text-blue-400 mb-2">
                           {experience.company}
                         </p>
 
-                        <div className="flex flex-col sm:flex-row gap-2 text-gray-600 dark:text-gray-300 text-xs">
+                        <div className="flex flex-col gap-1 sm:gap-2 text-gray-600 dark:text-gray-300 text-xs">
                           <div className="flex items-center">
                             <Calendar className="w-3 h-3 mr-1 text-gray-400" />
                             {experience.period}
@@ -144,15 +143,15 @@ const ExperienceTimeline = ({ experiences }: ExperienceTimelineProps) => {
                         </div>
                       </div>
 
-                      <div className="ml-4 flex-shrink-0">
+                      <div className="ml-2 sm:ml-4 flex-shrink-0">
                         <motion.div
                           animate={{
                             rotate: expandedIndex === index ? 180 : 0,
                           }}
                           transition={{ duration: 0.3 }}
-                          className="p-2 rounded-full bg-gray-100 dark:bg-gray-800 group-hover:bg-blue-100 dark:group-hover:bg-blue-900/50 transition-colors"
+                          className="p-2 sm:p-2.5 rounded-full bg-gray-100 dark:bg-gray-800 group-hover:bg-blue-100 dark:group-hover:bg-blue-900/50 transition-colors touch-manipulation"
                         >
-                          <ChevronDown className="w-4 h-4 text-gray-600 dark:text-gray-300 group-hover:text-blue-600 dark:group-hover:text-blue-400" />
+                          <ChevronDown className="w-4 h-4 sm:w-5 sm:h-5 text-gray-600 dark:text-gray-300 group-hover:text-blue-600 dark:group-hover:text-blue-400" />
                         </motion.div>
                       </div>
                     </div>
@@ -168,21 +167,21 @@ const ExperienceTimeline = ({ experiences }: ExperienceTimelineProps) => {
                         transition={{ duration: 0.3, ease: "easeInOut" }}
                         className="overflow-hidden"
                       >
-                        <div className="px-6 pb-6 border-t border-gray-200 dark:border-gray-700 pt-4">
+                        <div className="px-4 sm:px-6 pb-4 sm:pb-6 border-t border-gray-200 dark:border-gray-700 pt-4">
                           {/* Description */}
-                          <div className="mb-6">
-                            <p className="text-gray-600 dark:text-gray-300 leading-relaxed mb-4 text-sm">
+                          <div className="mb-4 sm:mb-6">
+                            <p className="text-gray-600 dark:text-gray-300 leading-relaxed mb-3 sm:mb-4 text-xs sm:text-sm">
                               {experience.description[0]}
                             </p>
 
                             {/* Key Achievements */}
                             {experience.achievements && (
-                              <div className="mb-4">
-                                <h4 className="text-sm font-semibold text-gray-900 dark:text-white mb-3 flex items-center">
-                                  <TrendingUp className="w-4 h-4 mr-2 text-green-500" />
+                              <div className="mb-3 sm:mb-4">
+                                <h4 className="text-xs sm:text-sm font-semibold text-gray-900 dark:text-white mb-2 sm:mb-3 flex items-center">
+                                  <TrendingUp className="w-3 h-3 sm:w-4 sm:h-4 mr-2 text-green-500" />
                                   Key Achievements
                                 </h4>
-                                <ul className="space-y-2">
+                                <ul className="space-y-1.5 sm:space-y-2">
                                   {experience.achievements.map(
                                     (achievement, idx) => (
                                       <motion.li
@@ -190,9 +189,9 @@ const ExperienceTimeline = ({ experiences }: ExperienceTimelineProps) => {
                                         initial={{ opacity: 0, x: -20 }}
                                         animate={{ opacity: 1, x: 0 }}
                                         transition={{ delay: idx * 0.1 }}
-                                        className="flex items-start text-sm text-gray-600 dark:text-gray-300"
+                                        className="flex items-start text-xs sm:text-sm text-gray-600 dark:text-gray-300"
                                       >
-                                        <ArrowRight className="w-3 h-3 mt-0.5 mr-2 text-green-500 flex-shrink-0" />
+                                        <ArrowRight className="w-2.5 h-2.5 sm:w-3 sm:h-3 mt-0.5 mr-2 text-green-500 flex-shrink-0" />
                                         {achievement}
                                       </motion.li>
                                     ),
@@ -203,11 +202,11 @@ const ExperienceTimeline = ({ experiences }: ExperienceTimelineProps) => {
 
                             {/* Detailed Description */}
                             {experience.description.length > 1 && (
-                              <div className="mb-4">
-                                <h4 className="text-sm font-semibold text-gray-900 dark:text-white mb-3">
+                              <div className="mb-3 sm:mb-4">
+                                <h4 className="text-xs sm:text-sm font-semibold text-gray-900 dark:text-white mb-2 sm:mb-3">
                                   Key Responsibilities
                                 </h4>
-                                <ul className="space-y-2">
+                                <ul className="space-y-1.5 sm:space-y-2">
                                   {experience.description
                                     .slice(1)
                                     .map((desc, idx) => (
@@ -216,9 +215,9 @@ const ExperienceTimeline = ({ experiences }: ExperienceTimelineProps) => {
                                         initial={{ opacity: 0, x: -20 }}
                                         animate={{ opacity: 1, x: 0 }}
                                         transition={{ delay: idx * 0.1 + 0.2 }}
-                                        className="flex items-start text-sm text-gray-600 dark:text-gray-300"
+                                        className="flex items-start text-xs sm:text-sm text-gray-600 dark:text-gray-300"
                                       >
-                                        <ArrowRight className="w-3 h-3 mt-0.5 mr-2 text-blue-500 flex-shrink-0" />
+                                        <ArrowRight className="w-2.5 h-2.5 sm:w-3 sm:h-3 mt-0.5 mr-2 text-blue-500 flex-shrink-0" />
                                         {desc}
                                       </motion.li>
                                     ))}
@@ -229,10 +228,10 @@ const ExperienceTimeline = ({ experiences }: ExperienceTimelineProps) => {
 
                           {/* Technologies */}
                           <div>
-                            <h4 className="text-sm font-semibold text-gray-900 dark:text-white mb-3">
+                            <h4 className="text-xs sm:text-sm font-semibold text-gray-900 dark:text-white mb-2 sm:mb-3">
                               Technologies Used
                             </h4>
-                            <div className="flex flex-wrap gap-2">
+                            <div className="flex flex-wrap gap-1.5 sm:gap-2">
                               {experience.technologies.map((tech, techIdx) => (
                                 <motion.span
                                   key={tech}
@@ -240,7 +239,7 @@ const ExperienceTimeline = ({ experiences }: ExperienceTimelineProps) => {
                                   animate={{ opacity: 1, scale: 1 }}
                                   transition={{ delay: techIdx * 0.05 }}
                                   whileHover={{ scale: 1.05 }}
-                                  className="px-2 py-1 text-xs font-medium bg-gradient-to-r from-purple-500/10 to-blue-500/10 text-purple-700 dark:text-purple-300 rounded-full border border-purple-200 dark:border-purple-700 hover:border-purple-300 dark:hover:border-purple-600 transition-colors cursor-default"
+                                  className="px-2 py-0.5 sm:py-1 text-xs font-medium bg-gradient-to-r from-purple-500/10 to-blue-500/10 text-purple-700 dark:text-purple-300 rounded-full border border-purple-200 dark:border-purple-700 hover:border-purple-300 dark:hover:border-purple-600 transition-colors cursor-default"
                                 >
                                   {tech}
                                 </motion.span>
@@ -254,8 +253,8 @@ const ExperienceTimeline = ({ experiences }: ExperienceTimelineProps) => {
                 </div>
 
                 {/* Decorative Elements */}
-                <div className="absolute -top-2 -right-2 w-20 h-20 bg-gradient-to-br from-blue-500/10 to-purple-500/10 rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                <div className="absolute -bottom-2 -left-2 w-16 h-16 bg-gradient-to-tr from-purple-500/10 to-indigo-500/10 rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-200" />
+                <div className="absolute -top-2 -right-2 w-16 h-16 sm:w-20 sm:h-20 bg-gradient-to-br from-blue-500/10 to-purple-500/10 rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                <div className="absolute -bottom-2 -left-2 w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-tr from-purple-500/10 to-indigo-500/10 rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-200" />
               </motion.div>
             </div>
 
@@ -283,16 +282,16 @@ const ExperienceTimeline = ({ experiences }: ExperienceTimelineProps) => {
         whileInView={{ opacity: 1, scale: 1 }}
         viewport={{ once: true }}
         transition={{ delay: experiences.length * 0.2 + 1 }}
-        className="flex justify-center mt-16"
+        className="flex justify-center mt-12 sm:mt-16"
       >
         <div className="relative">
-          <div className="w-20 h-20 bg-gradient-to-r from-green-500 to-blue-500 rounded-full flex items-center justify-center shadow-xl">
-            <div className="w-12 h-12 bg-white dark:bg-gray-900 rounded-full flex items-center justify-center">
-              <span className="text-2xl">🚀</span>
+          <div className="w-16 h-16 sm:w-20 sm:h-20 bg-gradient-to-r from-green-500 to-blue-500 rounded-full flex items-center justify-center shadow-xl">
+            <div className="w-10 h-10 sm:w-12 sm:h-12 bg-white dark:bg-gray-900 rounded-full flex items-center justify-center">
+              <span className="text-xl sm:text-2xl">🚀</span>
             </div>
           </div>
           <motion.div
-            className="absolute inset-0 rounded-full border-4 border-green-500"
+            className="absolute inset-0 rounded-full border-2 sm:border-4 border-green-500"
             animate={{
               scale: [1, 1.3, 1],
               opacity: [0.7, 0, 0.7],
@@ -303,7 +302,7 @@ const ExperienceTimeline = ({ experiences }: ExperienceTimelineProps) => {
               ease: "easeInOut",
             }}
           />
-          <p className="text-center mt-4 text-sm font-semibold text-gray-600 dark:text-gray-300">
+          <p className="text-center mt-3 sm:mt-4 text-xs sm:text-sm font-semibold text-gray-600 dark:text-gray-300 px-4">
             The Journey Continues...
           </p>
         </div>

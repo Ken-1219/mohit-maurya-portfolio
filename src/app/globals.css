@@ -35,6 +35,70 @@ body {
 @media (hover: none) and (pointer: coarse) {
     body {
         cursor: auto;
+        /* Improve touch scrolling */
+        -webkit-overflow-scrolling: touch;
+        touch-action: manipulation;
+    }
+}
+
+/* Mobile-first optimizations */
+@media (max-width: 768px) {
+    /* Better touch targets */
+    button,
+    a,
+    input,
+    textarea,
+    select {
+        min-height: 44px;
+        min-width: 44px;
+    }
+
+    /* Prevent zoom on input focus */
+    input,
+    textarea,
+    select {
+        font-size: 16px;
+    }
+
+    /* Better mobile spacing */
+    .container {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+}
+
+/* Touch-friendly interactions */
+.touch-manipulation {
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
+}
+
+/* Prevent text selection on interactive elements */
+button,
+.button,
+[role="button"] {
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+/* Better focus states for mobile */
+@media (hover: none) and (pointer: coarse) {
+    *:focus {
+        outline: 2px solid #3b82f6;
+        outline-offset: 2px;
+    }
+
+    button:focus,
+    a:focus,
+    input:focus,
+    textarea:focus {
+        outline: 2px solid #3b82f6;
+        outline-offset: 2px;
     }
 }
 
@@ -94,6 +158,57 @@ html {
 /* Prevent scroll bounce on iOS */
 body {
     overscroll-behavior-y: none;
+    overscroll-behavior-x: none;
+}
+
+/* Mobile performance optimizations */
+@media (max-width: 768px) {
+    /* Reduce animations on mobile for better performance */
+    * {
+        animation-duration: 0.3s !important;
+        animation-delay: 0s !important;
+        transition-duration: 0.2s !important;
+    }
+
+    /* Disable complex animations on low-end devices */
+    @media (prefers-reduced-motion: reduce) {
+        * {
+            animation-duration: 0.01s !important;
+            animation-iteration-count: 1 !important;
+            transition-duration: 0.01s !important;
+        }
+    }
+
+    /* Better mobile rendering */
+    .animate-blob,
+    .animate-float,
+    .animate-spin-slow {
+        will-change: transform;
+        backface-visibility: hidden;
+        perspective: 1000px;
+    }
+}
+
+/* Mobile-specific utility classes */
+@media (max-width: 640px) {
+    .mobile-hidden {
+        display: none !important;
+    }
+
+    .mobile-full-width {
+        width: 100% !important;
+    }
+
+    .mobile-text-center {
+        text-align: center !important;
+    }
+}
+
+/* Tablet-specific optimizations */
+@media (min-width: 641px) and (max-width: 1024px) {
+    .tablet-hidden {
+        display: none !important;
+    }
 }
 
 /* Smooth section transitions */
@@ -186,4 +301,63 @@ textarea:focus {
     transition-property: background-color, border-color, color, fill, stroke;
     transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
     transition-duration: 150ms;
+}
+
+/* Mobile-first responsive typography */
+@media (max-width: 640px) {
+    h1 {
+        font-size: 1.875rem; /* 30px */
+        line-height: 2.25rem; /* 36px */
+    }
+
+    h2 {
+        font-size: 1.5rem; /* 24px */
+        line-height: 2rem; /* 32px */
+    }
+
+    h3 {
+        font-size: 1.25rem; /* 20px */
+        line-height: 1.75rem; /* 28px */
+    }
+
+    p {
+        font-size: 0.875rem; /* 14px */
+        line-height: 1.25rem; /* 20px */
+    }
+}
+
+/* Safe area insets for notched devices */
+@supports (padding: max(0px)) {
+    body {
+        padding-left: max(0px, env(safe-area-inset-left));
+        padding-right: max(0px, env(safe-area-inset-right));
+    }
+
+    .safe-top {
+        padding-top: max(0px, env(safe-area-inset-top));
+    }
+
+    .safe-bottom {
+        padding-bottom: max(0px, env(safe-area-inset-bottom));
+    }
+}
+
+/* Better mobile form styling */
+@media (max-width: 768px) {
+    input,
+    textarea,
+    select {
+        border-radius: 0.5rem;
+        padding: 0.75rem;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    /* Improve mobile button styling */
+    button {
+        border-radius: 0.75rem;
+        padding: 0.75rem 1.5rem;
+        font-weight: 600;
+        min-height: 48px;
+    }
 }

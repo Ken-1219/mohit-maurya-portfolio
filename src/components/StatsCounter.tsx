@@ -115,7 +115,7 @@ const StatsCounter = ({ stats, className = "" }: StatsCounterProps) => {
       variants={containerVariants}
       initial="hidden"
       animate={isInView ? "visible" : "hidden"}
-      className={`grid grid-cols-2 gap-6 max-w-2xl mx-auto ${className}`}
+      className={`grid grid-cols-2 gap-3 sm:gap-4 lg:gap-6 max-w-xs sm:max-w-lg lg:max-w-2xl mx-auto ${className}`}
     >
       {stats.map((stat, index) => (
         <motion.div
@@ -135,13 +135,13 @@ const StatsCounter = ({ stats, className = "" }: StatsCounterProps) => {
           />
 
           {/* Main Card */}
-          <div className="relative bg-white dark:bg-gray-900 rounded-2xl p-6 text-center border border-gray-200 dark:border-gray-700 hover:border-blue-300 dark:hover:border-blue-600 transition-all duration-300 shadow-lg hover:shadow-xl min-h-[180px] flex flex-col justify-center">
+          <div className="relative bg-white dark:bg-gray-900 rounded-xl sm:rounded-2xl p-4 sm:p-6 text-center border border-gray-200 dark:border-gray-700 hover:border-blue-300 dark:hover:border-blue-600 transition-all duration-300 shadow-lg hover:shadow-xl min-h-[140px] sm:min-h-[160px] lg:min-h-[180px] flex flex-col justify-center">
             {/* Animated Border */}
-            <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-blue-500 to-purple-500 opacity-0 group-hover:opacity-20 transition-opacity duration-300" />
+            <div className="absolute inset-0 rounded-xl sm:rounded-2xl bg-gradient-to-r from-blue-500 to-purple-500 opacity-0 group-hover:opacity-20 transition-opacity duration-300" />
 
             {/* Counter */}
             <motion.div
-              className={`text-4xl xl:text-5xl font-bold mb-3 bg-gradient-to-r ${
+              className={`text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-bold mb-2 sm:mb-3 bg-gradient-to-r ${
                 stat.color || "from-blue-600 to-purple-600"
               } bg-clip-text text-transparent relative z-10`}
               initial={{ scale: 0.5, opacity: 0 }}
@@ -167,7 +167,7 @@ const StatsCounter = ({ stats, className = "" }: StatsCounterProps) => {
 
             {/* Label */}
             <motion.p
-              className="text-sm font-semibold text-gray-600 dark:text-gray-300 relative z-10 uppercase tracking-wide"
+              className="text-xs sm:text-sm font-semibold text-gray-600 dark:text-gray-300 relative z-10 uppercase tracking-wide leading-tight"
               initial={{ opacity: 0, y: 10 }}
               animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
               transition={{
