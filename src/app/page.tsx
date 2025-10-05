@@ -437,11 +437,11 @@ export default function Portfolio() {
               stats={[
                 {
                   id: "experience",
-                  value: 2,
+                  value: 1,
                   label: "Years Experience",
                   suffix: "+",
                   color: "from-blue-600 to-blue-400",
-                  duration: 2.5,
+                  duration: 1.5,
                 },
                 {
                   id: "projects",
@@ -482,7 +482,7 @@ export default function Portfolio() {
         id="experience"
         className="min-h-screen flex items-center justify-center py-20 px-4 sm:px-6 lg:px-8 bg-gray-50 dark:bg-gray-800/50"
       >
-        <div className="max-w-7xl mx-auto">
+        <div className="w-full mx-auto">
           <motion.div
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
@@ -504,7 +504,7 @@ export default function Portfolio() {
                 company: "ContraVault AI",
                 period: "December 2024 - Present",
                 type: "Full-time",
-                location: "Remote",
+                location: "Bengaluru, India (Onsite)",
                 description: [
                   "Leading end-to-end development of AI-powered contract analysis platform, architecting scalable solutions that serve enterprise clients with complex legal document processing needs.",
                   "Implemented Attribute-Based Access Control (ABAC) end-to-end, defining three unique user roles with precise access restrictions",
