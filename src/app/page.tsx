@@ -275,28 +275,82 @@ export default function Portfolio() {
       {/* Hero Section */}
       <section
         id="hero"
-        className="min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8"
+        className="relative min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 overflow-hidden"
       >
-        <div className="max-w-4xl mx-auto text-center">
+        {/* Animated Background */}
+        <div className="absolute inset-0 overflow-hidden">
+          <div className="absolute -inset-10 opacity-50">
+            <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-500/20 rounded-full mix-blend-multiply filter blur-xl animate-blob"></div>
+            <div className="absolute top-1/3 right-1/4 w-96 h-96 bg-purple-500/20 rounded-full mix-blend-multiply filter blur-xl animate-blob animation-delay-2000"></div>
+            <div className="absolute bottom-1/4 left-1/3 w-96 h-96 bg-indigo-500/20 rounded-full mix-blend-multiply filter blur-xl animate-blob animation-delay-4000"></div>
+          </div>
+        </div>
+
+        {/* Floating particles */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          {[...Array(20)].map((_, i) => (
+            <div
+              key={i}
+              className="absolute animate-float"
+              style={{
+                left: `${Math.random() * 100}%`,
+                top: `${Math.random() * 100}%`,
+                animationDelay: `${Math.random() * 5}s`,
+                animationDuration: `${3 + Math.random() * 4}s`,
+              }}
+            >
+              <div className="w-2 h-2 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full opacity-60"></div>
+            </div>
+          ))}
+        </div>
+
+        <div className="relative z-10 max-w-5xl mx-auto text-center">
+          {/* Profile Image with Enhanced Design */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.5 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-            className="relative"
+            initial={{ opacity: 0, scale: 0.5, rotateY: 180 }}
+            animate={{ opacity: 1, scale: 1, rotateY: 0 }}
+            transition={{ duration: 1.2, ease: "easeOut" }}
+            className="relative mb-8"
           >
-            <div className="w-32 h-32 mx-auto mb-8 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center text-4xl font-bold text-white shadow-xl">
-              MM
+            <div className="relative w-40 h-40 mx-auto">
+              {/* Rotating border */}
+              <div className="absolute inset-0 rounded-full bg-gradient-to-r from-blue-500 via-purple-500 to-indigo-500 animate-spin-slow p-1">
+                <div className="w-full h-full rounded-full bg-white dark:bg-gray-900"></div>
+              </div>
+
+              {/* Avatar */}
+              <div className="absolute inset-2 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center text-4xl font-bold text-white shadow-2xl">
+                <span className="text-5xl">MM</span>
+              </div>
+
+              {/* Status indicator */}
+              <div className="absolute bottom-2 right-2 w-6 h-6 bg-green-500 rounded-full border-4 border-white dark:border-gray-900 animate-pulse"></div>
             </div>
           </motion.div>
 
+          {/* Name with enhanced animation */}
           <motion.h1
-            {...fadeInUp}
-            transition={{ delay: 0.2, duration: 0.6, ease: "easeOut" }}
-            className="text-4xl sm:text-6xl lg:text-7xl font-bold mb-6"
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3, duration: 0.8, ease: "easeOut" }}
+            className="text-5xl sm:text-7xl lg:text-8xl font-bold mb-6 tracking-tight"
           >
-            <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600 bg-clip-text text-transparent">
+            <motion.span
+              className="inline-block bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600 bg-clip-text text-transparent"
+              initial={{ backgroundPosition: "200% center" }}
+              animate={{ backgroundPosition: "-200% center" }}
+              transition={{
+                duration: 3,
+                ease: "linear",
+                repeat: Infinity,
+                repeatType: "reverse",
+              }}
+              style={{
+                backgroundSize: "200% 200%",
+              }}
+            >
               Mohit Maurya
-            </span>
+            </motion.span>
           </motion.h1>
 
           <motion.div
@@ -319,64 +373,101 @@ export default function Portfolio() {
             />
           </motion.div>
 
+          {/* Mission statement */}
+          <motion.p
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.7, duration: 0.8, ease: "easeOut" }}
+            className="text-lg text-gray-500 dark:text-gray-400 mb-12 max-w-2xl mx-auto leading-relaxed"
+          >
+            Crafting digital experiences that bridge innovation and
+            functionality. Let&apos;s build something amazing together.
+          </motion.p>
+
+          {/* Enhanced CTA buttons */}
           <motion.div
-            {...fadeInUp}
-            transition={{ delay: 0.6, duration: 0.6, ease: "easeOut" }}
-            className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.9, duration: 0.8, ease: "easeOut" }}
+            className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-16"
           >
             <motion.a
-              whileHover={{ scale: 1.05 }}
+              whileHover={{
+                scale: 1.05,
+                boxShadow: "0 20px 40px rgba(59, 130, 246, 0.3)",
+              }}
               whileTap={{ scale: 0.95 }}
               href="#contact"
               onClick={(e) => {
                 e.preventDefault();
                 scrollToSection("contact");
               }}
-              className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-3 rounded-full font-semibold shadow-lg hover:shadow-xl transition-all flex items-center space-x-2"
+              className="group relative bg-gradient-to-r from-blue-600 to-purple-600 text-white px-10 py-4 rounded-full font-semibold shadow-xl hover:shadow-2xl transition-all flex items-center space-x-3 overflow-hidden"
             >
-              <span>Get In Touch</span>
-              <ArrowRight className="w-4 h-4" />
+              <div className="absolute inset-0 bg-gradient-to-r from-purple-600 to-blue-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              <span className="relative z-10">Let&apos;s Connect</span>
+              <ArrowRight className="w-5 h-5 relative z-10 group-hover:translate-x-1 transition-transform" />
             </motion.a>
 
             <motion.button
-              whileHover={{ scale: 1.05 }}
+              whileHover={{
+                scale: 1.05,
+                backgroundColor: "rgb(59, 130, 246)",
+                color: "white",
+                boxShadow: "0 20px 40px rgba(59, 130, 246, 0.2)",
+              }}
               whileTap={{ scale: 0.95 }}
-              className="border-2 border-blue-600 text-blue-600 dark:text-blue-400 px-8 py-3 rounded-full font-semibold hover:bg-blue-600 hover:text-white transition-all flex items-center space-x-2"
+              className="group border-2 border-blue-600 text-blue-600 dark:text-blue-400 px-10 py-4 rounded-full font-semibold transition-all flex items-center space-x-3 backdrop-blur-sm bg-white/10 hover:bg-blue-600 hover:border-blue-600"
             >
-              <Download className="w-4 h-4" />
+              <Download className="w-5 h-5 group-hover:animate-bounce" />
               <span>Download Resume</span>
             </motion.button>
           </motion.div>
 
+          {/* Enhanced social links */}
           <motion.div
-            {...fadeInUp}
-            transition={{ delay: 0.8, duration: 0.6, ease: "easeOut" }}
-            className="flex justify-center space-x-6"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 1.1, duration: 0.8, ease: "easeOut" }}
+            className="flex justify-center space-x-8"
           >
             {[
               {
                 icon: Github,
                 href: "https://github.com/Ken-1219",
                 label: "GitHub",
+                color: "from-gray-600 to-gray-800",
               },
               {
                 icon: Linkedin,
                 href: "https://www.linkedin.com/in/mohit-maurya-9a13a222a/",
                 label: "LinkedIn",
+                color: "from-blue-600 to-blue-800",
               },
               {
                 icon: Mail,
                 href: "mailto:mohitmaurya78871@gmail.com",
                 label: "Email",
+                color: "from-red-500 to-red-700",
               },
-              { icon: Phone, href: "tel:+918882825731", label: "Phone" },
+              {
+                icon: Phone,
+                href: "tel:+918882825731",
+                label: "Phone",
+                color: "from-green-500 to-green-700",
+              },
             ].map((social, index) => (
               <motion.a
                 key={social.label}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 1 + index * 0.1 }}
-                whileHover={{ scale: 1.2, y: -2 }}
+                initial={{ opacity: 0, y: 20, rotate: -180 }}
+                animate={{ opacity: 1, y: 0, rotate: 0 }}
+                transition={{ delay: 1.3 + index * 0.1, duration: 0.6 }}
+                whileHover={{
+                  scale: 1.3,
+                  y: -8,
+                  rotate: 5,
+                  boxShadow: "0 20px 40px rgba(0, 0, 0, 0.1)",
+                }}
                 href={social.href}
                 target={social.href.startsWith("http") ? "_blank" : undefined}
                 rel={
@@ -384,12 +475,39 @@ export default function Portfolio() {
                     ? "noopener noreferrer"
                     : undefined
                 }
-                className="p-3 bg-gray-100 dark:bg-gray-800 rounded-full hover:bg-blue-600 hover:text-white transition-colors"
+                className={`group p-4 bg-gradient-to-r ${social.color} rounded-2xl text-white shadow-lg hover:shadow-xl transition-all duration-300`}
                 aria-label={social.label}
               >
-                <social.icon className="w-5 h-5" />
+                <social.icon className="w-6 h-6 group-hover:scale-110 transition-transform" />
               </motion.a>
             ))}
+          </motion.div>
+
+          {/* Scroll indicator */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 1.5, duration: 0.8 }}
+            className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
+          >
+            <motion.div
+              animate={{ y: [0, 10, 0] }}
+              transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+              className="flex flex-col items-center text-gray-400 dark:text-gray-500"
+            >
+              <span className="text-sm mb-2">Scroll to explore</span>
+              <div className="w-6 h-10 border-2 border-current rounded-full flex justify-center">
+                <motion.div
+                  animate={{ y: [0, 12, 0] }}
+                  transition={{
+                    duration: 2,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                  }}
+                  className="w-1 h-3 bg-current rounded-full mt-2"
+                />
+              </div>
+            </motion.div>
           </motion.div>
         </div>
       </section>
@@ -788,7 +906,7 @@ export default function Portfolio() {
               <motion.div
                 key={index}
                 variants={fadeInUp}
-                className="group bg-white dark:bg-gray-900 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-200 dark:border-gray-700 hover:border-transparent hover:shadow-2xl"
+                className="group bg-white dark:bg-gray-900 rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-200 dark:border-gray-700 hover:border-transparent"
               >
                 {/* Background Gradient */}
                 <div
@@ -841,23 +959,53 @@ export default function Portfolio() {
       {/* Contact Section */}
       <section
         id="contact"
-        className="min-h-screen flex items-center justify-center py-20 px-4 sm:px-6 lg:px-8 bg-gray-50 dark:bg-gray-800/50"
+        className="relative min-h-screen flex items-center justify-center py-20 px-4 sm:px-6 lg:px-8 bg-gray-50 dark:bg-gray-800/50 overflow-hidden"
       >
-        <div className="max-w-4xl mx-auto">
+        {/* Background decoration */}
+        <div className="absolute inset-0 overflow-hidden">
+          <div className="absolute top-1/4 right-0 w-96 h-96 bg-blue-500/5 rounded-full transform translate-x-1/2"></div>
+          <div className="absolute bottom-1/4 left-0 w-96 h-96 bg-purple-500/5 rounded-full transform -translate-x-1/2"></div>
+        </div>
+
+        <div className="relative z-10 max-w-7xl mx-auto">
           <motion.div
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <h2 className="text-3xl sm:text-4xl font-bold mb-4">
-              Get In Touch
-            </h2>
-            <div className="w-24 h-1 bg-gradient-to-r from-blue-600 to-purple-600 mx-auto mb-8"></div>
-            <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-              I&apos;m always interested in new opportunities and exciting
-              projects. Let&apos;s connect and discuss how we can work together!
-            </p>
+            <motion.h2
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="text-4xl sm:text-5xl font-bold mb-6"
+            >
+              <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                Let&apos;s Create Something
+              </span>
+              <br />
+              <span className="text-gray-900 dark:text-white">
+                Amazing Together
+              </span>
+            </motion.h2>
+            <motion.div
+              initial={{ width: 0 }}
+              whileInView={{ width: "6rem" }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.5, duration: 0.8 }}
+              className="h-1 bg-gradient-to-r from-blue-600 to-purple-600 mx-auto mb-8"
+            />
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.3 }}
+              className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed"
+            >
+              Ready to turn ideas into reality? I&apos;m always excited to
+              collaborate on innovative projects and discuss new opportunities.
+              Let&apos;s connect and build something extraordinary!
+            </motion.p>
           </motion.div>
 
           <div className="grid md:grid-cols-2 gap-8 mb-12">
