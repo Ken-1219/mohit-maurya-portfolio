@@ -31,13 +31,6 @@ export const site = {
     },
   ],
 
-  portrait: {
-    src: "/mohit-portrait.jpg",
-    alt: "Mohit Maurya at his desk",
-    width: 1200,
-    height: 1500,
-  },
-
   meta: {
     title: "Mohit Maurya · Full stack and AI engineer",
     description:
@@ -45,6 +38,29 @@ export const site = {
     canonical: "https://mohitxmaurya.vercel.app",
   },
 } as const;
+
+/**
+ * The hero portrait is deliberately NOT in this repo — the image file is
+ * gitignored. Set NEXT_PUBLIC_PORTRAIT_URL to show it:
+ *
+ *   NEXT_PUBLIC_PORTRAIT_URL=/mohit-portrait.jpg        (local dev, file in /public)
+ *   NEXT_PUBLIC_PORTRAIT_URL=https://host/portrait.jpg  (deployed)
+ *
+ * A remote host must also be allowed in next.config.ts, which reads the same
+ * variable and adds it to images.remotePatterns automatically.
+ *
+ * With no value set, the hero renders the approved no-portrait layout
+ * (Doop frame "Hero / no portrait (v4 option)"), so the site is complete
+ * without the photo.
+ */
+export const portrait = process.env.NEXT_PUBLIC_PORTRAIT_URL
+  ? {
+      src: process.env.NEXT_PUBLIC_PORTRAIT_URL,
+      alt: "Mohit Maurya at his desk",
+      width: 1200,
+      height: 1500,
+    }
+  : null;
 
 export const workIndex = [
   {
