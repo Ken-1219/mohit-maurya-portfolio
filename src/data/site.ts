@@ -57,8 +57,10 @@ export const portrait = process.env.NEXT_PUBLIC_PORTRAIT_URL
   ? {
       src: process.env.NEXT_PUBLIC_PORTRAIT_URL,
       alt: "Mohit Maurya at his desk",
+      // Intrinsic size of the hosted file. The frame crops to 4:5 with
+      // object-fit: cover, so a source of any ratio still fills the slot.
       width: 1200,
-      height: 1500,
+      height: 1600,
     }
   : null;
 

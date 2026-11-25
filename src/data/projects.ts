@@ -145,10 +145,10 @@ export const diagrams = {
     caption: "The hard problem",
     rows: [
       { kind: "kv", k: "PK", v: "SK", head: true },
-      { kind: "kv", k: "GAME#<gameId>", v: "METADATA" },
-      { kind: "kv", k: "GAME#<gameId>", v: "PLAYER#<playerId>" },
-      { kind: "kv", k: "GAME#<gameId>", v: "GUESS#<ts>#<id>" },
-      { kind: "kv", k: "PLAYER#<playerId>", v: "PROFILE" },
+      { kind: "kv", k: "GAME#<gameId>", v: "METADATA" , head: false },
+      { kind: "kv", k: "GAME#<gameId>", v: "PLAYER#<playerId>" , head: false },
+      { kind: "kv", k: "GAME#<gameId>", v: "GUESS#<ts>#<id>" , head: false },
+      { kind: "kv", k: "PLAYER#<playerId>", v: "PROFILE" , head: false },
       {
         kind: "note",
         text: "one game is one partition, so metadata, players and guesses read together",

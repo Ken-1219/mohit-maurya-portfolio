@@ -1,88 +1,78 @@
-import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import type { Metadata, Viewport } from "next";
+import { Source_Serif_4, Work_Sans, IBM_Plex_Mono } from "next/font/google";
+import { site } from "@/data/site";
 import "./globals.css";
 
-import CustomCursor from "../components/CustomCursor";
-import ParticleBackground from "../components/ParticleBackground";
-import FloatingIcons from "../components/FloatingIcons";
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const sourceSerif = Source_Serif_4({
+  variable: "--font-source-serif",
   subsets: ["latin"],
+  display: "swap",
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const workSans = Work_Sans({
+  variable: "--font-work-sans",
   subsets: ["latin"],
+  display: "swap",
+});
+
+const plexMono = IBM_Plex_Mono({
+  variable: "--font-plex-mono",
+  subsets: ["latin"],
+  weight: ["400", "500"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {
-  title: "Mohit Maurya - Full Stack Developer",
-  description:
-    "Full Stack Developer specializing in React, Next.js, Node.js, and AWS. Currently Founding Engineer at ContraVault AI.",
-  keywords: [
-    "Mohit Maurya",
-    "Full Stack Developer",
-    "React",
-    "Next.js",
-    "Node.js",
-    "AWS",
-    "TypeScript",
-    "JavaScript",
-  ],
-  authors: [{ name: "Mohit Maurya" }],
-  creator: "Mohit Maurya",
-  viewport: {
-    width: "device-width",
-    initialScale: 1,
-    maximumScale: 5,
-    userScalable: true,
-    viewportFit: "cover",
-  },
-  themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
-    { media: "(prefers-color-scheme: dark)", color: "#0a0a0a" },
-  ],
-  appleWebApp: {
-    capable: true,
-    statusBarStyle: "default",
-    title: "Mohit Maurya",
-  },
-  formatDetection: {
-    telephone: false,
-  },
+  metadataBase: new URL(site.meta.canonical),
+  title: site.meta.title,
+  description: site.meta.description,
+  authors: [{ name: site.name }],
+  creator: site.name,
+  alternates: { canonical: "/" },
   openGraph: {
-    type: "website",
-    locale: "en_US",
-    url: "https://mohitmaurya.dev",
-    title: "Mohit Maurya - Full Stack Developer",
-    description:
-      "Full Stack Developer specializing in React, Next.js, Node.js, and AWS. Currently Founding Engineer at ContraVault AI.",
-    siteName: "Mohit Maurya Portfolio",
+    type: "profile",
+    locale: "en_IN",
+    url: site.meta.canonical,
+    siteName: site.meta.title,
+    title: site.meta.title,
+    description: site.meta.description,
   },
   twitter: {
     card: "summary_large_image",
-    title: "Mohit Maurya - Full Stack Developer",
-    description:
-      "Full Stack Developer specializing in React, Next.js, Node.js, and AWS. Currently Founding Engineer at ContraVault AI.",
+    title: site.meta.title,
+    description: site.meta.description,
   },
 };
 
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover",
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#F1EEE8" },
+    { media: "(prefers-color-scheme: dark)", color: "#1A1815" },
+  ],
+};
+
+/**
+ * Runs before paint, so a stored theme is applied with no flash of the wrong
+ * one. With no stored choice nothing is set and the CSS media query decides.
+ * Also marks that script is running, which is what lets the skills grid hide
+ * itself before revealing — with JavaScript off it is simply visible.
+ */
+const boot = `(function(){try{var t=localStorage.getItem('theme');if(t==='dark'||t==='light'){document.documentElement.dataset.theme=t}}catch(e){}document.documentElement.classList.add('js')})()`;
+
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+}: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <head />
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: boot }} />
+      </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-        suppressHydrationWarning
+        className={`${sourceSerif.variable} ${workSans.variable} ${plexMono.variable}`}
       >
-        <ParticleBackground />
-        <FloatingIcons />
-        <CustomCursor />
         {children}
       </body>
     </html>

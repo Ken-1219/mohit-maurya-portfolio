@@ -19,7 +19,13 @@ const remotePatterns =
     : [];
 
 const nextConfig: NextConfig = {
-  images: { remotePatterns },
+  images: {
+    remotePatterns,
+    // The portrait never changes, and the upstream (Google Drive) is slow and
+    // rate-limited. Optimise it once and keep it on the CDN for a month, so a
+    // visitor never waits on the origin.
+    minimumCacheTTL: 60 * 60 * 24 * 31,
+  },
 };
 
 export default nextConfig;
