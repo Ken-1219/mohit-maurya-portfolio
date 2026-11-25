@@ -82,10 +82,12 @@ export const yirifi = {
   name: "Yirifi.ai",
   summary:
     "I wrote backend APIs in Express.js, including the integration mapping for external systems, and built pages and responsive interfaces in Next.js and Tailwind CSS. I also did performance work that brought load times down.",
+  // Newest first, as everywhere else on the page: the internship came first
+  // (June to August), the developer role followed it.
   meta: [
-    "Full Stack Developer, intern",
-    "August — November 2024",
     "Full Stack Developer",
+    "August — November 2024",
+    "Full Stack Developer, intern",
     "June — August 2024",
     "Singapore",
   ],
@@ -122,8 +124,8 @@ export const experience: Experience[] = [
     when: "Jun — Nov 2024",
     place: "Singapore",
     roles: [
-      { title: "Full Stack Developer, intern", when: "Aug — Nov 2024" },
-      { title: "Full Stack Developer", when: "Jun — Aug 2024" },
+      { title: "Full Stack Developer", when: "Aug — Nov 2024" },
+      { title: "Full Stack Developer, intern", when: "Jun — Aug 2024" },
     ],
   },
   {

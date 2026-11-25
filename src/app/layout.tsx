@@ -66,15 +66,18 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    // The font variables go on <html>, not <body>: the tokens in globals.css
+    // reference them from :root, and a custom property is substituted where it
+    // is declared, so --font-serif would otherwise resolve to nothing.
+    <html
+      lang="en"
+      className={`${sourceSerif.variable} ${workSans.variable} ${plexMono.variable}`}
+      suppressHydrationWarning
+    >
       <head>
         <script dangerouslySetInnerHTML={{ __html: boot }} />
       </head>
-      <body
-        className={`${sourceSerif.variable} ${workSans.variable} ${plexMono.variable}`}
-      >
-        {children}
-      </body>
+      <body>{children}</body>
     </html>
   );
 }
