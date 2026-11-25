@@ -26,7 +26,7 @@
   --color-inv-ink-3: #908b82;
   --color-inv-rule: rgba(237, 234, 228, 0.14);
   --color-inv-support: #7fa8c8;
-  --color-inv-accent: #e2594c;
+  --color-inv-accent: #e8655a;
 
   /* type */
   --font-serif: var(--font-source-serif), Georgia, serif;
@@ -90,11 +90,11 @@
     --color-recess: #2a2722;
     --color-ink: #edeae4;
     --color-ink-2: #b0aba3;
-    --color-ink-3: #908b82;
+    --color-ink-3: #999389;
     --color-rule: rgba(237, 234, 228, 0.14);
     --color-rule-strong: rgba(237, 234, 228, 0.26);
     --color-support: #7fa8c8;
-    --color-accent: #e2594c;
+    --color-accent: #e8655a;
     --color-inv-ground: #22201c;
     --color-inv-surface: #2a2722;
     color-scheme: dark;
@@ -107,11 +107,11 @@
   --color-recess: #2a2722;
   --color-ink: #edeae4;
   --color-ink-2: #b0aba3;
-  --color-ink-3: #908b82;
+  --color-ink-3: #999389;
   --color-rule: rgba(237, 234, 228, 0.14);
   --color-rule-strong: rgba(237, 234, 228, 0.26);
   --color-support: #7fa8c8;
-  --color-accent: #e2594c;
+  --color-accent: #e8655a;
   --color-inv-ground: #22201c;
   --color-inv-surface: #2a2722;
   color-scheme: dark;
