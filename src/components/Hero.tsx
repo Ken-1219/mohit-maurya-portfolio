@@ -48,7 +48,7 @@ export default function Hero() {
               alt={portrait.alt}
               width={portrait.width}
               height={portrait.height}
-              sizes="(max-width: 599px) 100vw, (max-width: 1023px) 280px, 340px"
+              sizes="(max-width: 599px) 100vw, (max-width: 1279px) 280px, 340px"
               priority
             />
           )}

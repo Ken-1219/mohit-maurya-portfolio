@@ -46,7 +46,7 @@ export default function SideProjects() {
                     alt={p.shot.alt}
                     width={p.shot.width}
                     height={p.shot.height}
-                    sizes="(max-width: 599px) 100vw, (max-width: 1023px) 50vw, 700px"
+                    sizes="(max-width: 599px) 100vw, (max-width: 1279px) 50vw, 700px"
                   />
                 </a>
                 <Diagram kind={p.diagram} />

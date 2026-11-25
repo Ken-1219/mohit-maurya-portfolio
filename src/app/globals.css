@@ -1215,7 +1215,7 @@ h3 {
 .js .skw[data-reveal="in"] .mg,
 .js .skw[data-reveal="in"] .nm,
 .js .skw[data-reveal="in"] .lab span {
-  transition-delay: calc(400ms + var(--i, 0) * 25ms);
+  transition-delay: calc(400ms + var(--i, 0) * 12ms);
 }
 
 /* ───────────────────────────────────────────────────────────────────────────
@@ -1252,10 +1252,12 @@ h3 {
 }
 
 /* ───────────────────────────────────────────────────────────────────────────
-   Narrower than 1024: the rail folds, the display sizes step down.
+   Narrower than the 1440 frame: the rail folds and the display sizes step
+   down. The threshold is 1280, not 1024: below that the two-column project
+   row cannot hold a 96px serif title without overflowing.
    ─────────────────────────────────────────────────────────────────────────── */
 
-@media (max-width: 1023px) {
+@media (max-width: 1279px) {
   :root {
     --container-margin: 40px;
     --text-figure: 88px;
@@ -1319,6 +1321,25 @@ h3 {
     --leading-read: 27px;
     --text-value: 19px;
     --leading-lead: 26px;
+  }
+
+  /* Two rows, as the 390 frame draws it: name and clock, then the links. */
+  .nb {
+    flex-wrap: wrap;
+    gap: var(--spacing-sm) var(--spacing-md);
+    align-items: baseline;
+  }
+  .nb__time {
+    margin-left: auto;
+  }
+  .nb__right {
+    flex-basis: 100%;
+    margin-left: 0;
+    gap: var(--spacing-md);
+    align-items: center;
+  }
+  .nb__tog {
+    margin-left: auto;
   }
 
   .hero,

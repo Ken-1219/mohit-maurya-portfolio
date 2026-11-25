@@ -22,7 +22,11 @@ export default function Skills() {
 
   useEffect(() => {
     const el = grid.current;
-    if (!el) return;
+    // No observer, no element: show the wall rather than hide it.
+    if (!el || typeof IntersectionObserver === "undefined") {
+      setRevealed(true);
+      return;
+    }
     // Reveal once, then stop watching.
     const io = new IntersectionObserver(
       (entries) => {
@@ -34,7 +38,13 @@ export default function Skills() {
       { threshold: 0.15 },
     );
     io.observe(el);
-    return () => io.disconnect();
+    // Safety net. The wall holds 36 tools; it must never stay invisible
+    // because an observer did not fire, so it gives up waiting and shows.
+    const failOpen = setTimeout(() => setRevealed(true), 1200);
+    return () => {
+      io.disconnect();
+      clearTimeout(failOpen);
+    };
   }, []);
 
   // Touch has no hover, so a tap toggles the "where I used it" swap.
@@ -104,6 +114,8 @@ export default function Skills() {
                         )}
                       </button>
                     ))}
+                    {/* Pads close the grid's hairlines only; they are not
+                        part of the reveal, so they do not advance --i. */}
                     {Array.from({ length: p.desktop }, (_, k) => (
                       <span
                         key={`d${k}`}
