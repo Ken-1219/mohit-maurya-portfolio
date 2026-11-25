@@ -43,3 +43,9 @@ next-env.d.ts
 # Personal photo — kept out of the repo on purpose. Served from a URL instead.
 /public/mohit-portrait.jpg
 /public/portrait.*
+
+# Local verification artifacts — screenshots can contain the portrait.
+/.playwright-mcp/
+/v4-*.png
+/final-*.png
+/lighthouse*.json
