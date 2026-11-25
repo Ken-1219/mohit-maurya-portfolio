@@ -1,52 +1,105 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useSyncExternalStore } from "react";
 import { site } from "@/data/site";
 
-/** Bengaluru time, to the minute. */
+type Theme = "light" | "dark";
+
+/* ── The clock ──────────────────────────────────────────────────────────────
+   Bengaluru time, to the minute. It is external state, not render state, so
+   it is read through a store rather than set from an effect. The server
+   snapshot is empty: the time cannot be known at build time. */
+
+let formatter: Intl.DateTimeFormat | null = null;
 function istNow() {
-  return new Intl.DateTimeFormat("en-GB", {
+  formatter ??= new Intl.DateTimeFormat("en-GB", {
     timeZone: "Asia/Kolkata",
     hour: "2-digit",
     minute: "2-digit",
     hour12: false,
-  }).format(new Date());
+  });
+  return formatter.format(new Date());
+}
+
+const clock = {
+  subscribe(onChange: () => void) {
+    let last = istNow();
+    // Checked four times a minute so the displayed minute is never stale by
+    // more than 15s, but a re-render only happens when it actually changes.
+    const id = setInterval(() => {
+      const next = istNow();
+      if (next !== last) {
+        last = next;
+        onChange();
+      }
+    }, 15_000);
+    return () => clearInterval(id);
+  },
+  getSnapshot: () => istNow(),
+  getServerSnapshot: () => "",
+};
+
+/* ── The theme ──────────────────────────────────────────────────────────────
+   Also external: it lives in localStorage and in the OS setting. A stored
+   choice wins; with none, the system decides. The inline script in layout.tsx
+   has already applied it before paint, so this only drives the toggle's
+   pressed state. */
+
+const listeners = new Set<() => void>();
+function emit() {
+  listeners.forEach((l) => l());
+}
+
+function readTheme(): Theme {
+  try {
+    const stored = localStorage.getItem("theme");
+    if (stored === "light" || stored === "dark") return stored;
+  } catch {
+    // private browsing: fall through to the system setting
+  }
+  return window.matchMedia("(prefers-color-scheme: dark)").matches
+    ? "dark"
+    : "light";
+}
+
+const theme = {
+  subscribe(onChange: () => void) {
+    listeners.add(onChange);
+    const mq = window.matchMedia("(prefers-color-scheme: dark)");
+    mq.addEventListener("change", onChange);
+    // another tab may change the stored choice
+    window.addEventListener("storage", onChange);
+    return () => {
+      listeners.delete(onChange);
+      mq.removeEventListener("change", onChange);
+      window.removeEventListener("storage", onChange);
+    };
+  },
+  getSnapshot: readTheme,
+  getServerSnapshot: (): Theme | null => null,
+};
+
+function choose(next: Theme) {
+  document.documentElement.dataset.theme = next;
+  try {
+    localStorage.setItem("theme", next);
+  } catch {
+    // private browsing: the choice just does not persist
+  }
+  emit();
 }
 
 export default function Nav() {
-  // Rendered empty on the server: the clock would otherwise disagree with the
-  // client and the whole nav would have to be suppressed from hydration.
-  const [time, setTime] = useState<string | null>(null);
-  const [theme, setTheme] = useState<"light" | "dark" | null>(null);
-
-  useEffect(() => {
-    setTime(istNow());
-    const id = setInterval(() => setTime(istNow()), 60_000);
-    return () => clearInterval(id);
-  }, []);
-
-  useEffect(() => {
-    const stored = localStorage.getItem("theme");
-    if (stored === "light" || stored === "dark") {
-      setTheme(stored);
-      return;
-    }
-    setTheme(
-      window.matchMedia("(prefers-color-scheme: dark)").matches
-        ? "dark"
-        : "light",
-    );
-  }, []);
-
-  function choose(next: "light" | "dark") {
-    setTheme(next);
-    document.documentElement.dataset.theme = next;
-    try {
-      localStorage.setItem("theme", next);
-    } catch {
-      // private browsing: the choice just does not persist
-    }
-  }
+  const time = useSyncExternalStore(
+    clock.subscribe,
+    clock.getSnapshot,
+    clock.getServerSnapshot,
+  );
+  const current = useSyncExternalStore(
+    theme.subscribe,
+    theme.getSnapshot,
+    theme.getServerSnapshot,
+  );
 
   return (
     <nav className="nb" aria-label="Primary">
@@ -64,7 +117,7 @@ export default function Nav() {
           <button
             type="button"
             className="nb__t"
-            aria-pressed={theme === "light"}
+            aria-pressed={current === "light"}
             onClick={() => choose("light")}
           >
             Bond
@@ -73,7 +126,7 @@ export default function Nav() {
           <button
             type="button"
             className="nb__t"
-            aria-pressed={theme === "dark"}
+            aria-pressed={current === "dark"}
             onClick={() => choose("dark")}
           >
             Carbon
